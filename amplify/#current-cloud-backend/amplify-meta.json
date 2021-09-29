@@ -1,0 +1,106 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-crowd-dev-135236-authRole",
+      "UnauthRoleArn": "arn:aws:iam::913505676166:role/amplify-crowd-dev-135236-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::913505676166:role/amplify-crowd-dev-135236-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-crowd-dev-135236-deployment",
+      "UnauthRoleName": "amplify-crowd-dev-135236-unauthRole",
+      "StackName": "amplify-crowd-dev-135236",
+      "StackId": "arn:aws:cloudformation:eu-central-1:913505676166:stack/amplify-crowd-dev-135236/408c66a0-1ec0-11ec-8c10-0ac2d9fd9ade",
+      "AmplifyAppId": "dycd41l2922us"
+    }
+  },
+  "auth": {
+    "crowda92ab9a0": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "loginMechanism": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ]
+      },
+      "output": {
+        "UserPoolId": "eu-central-1_V9dFfSbDv",
+        "AppClientIDWeb": "7v45ldc8cs1gh9g3sr7ui5m9gi",
+        "AppClientID": "5upkle68h321v4l2atjhqlekam",
+        "IdentityPoolId": "eu-central-1:5e4c291c-ed75-48ab-a182-720ed597c6ae",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-central-1:913505676166:userpool/eu-central-1_V9dFfSbDv",
+        "IdentityPoolName": "crowda92ab9a0_identitypool_a92ab9a0__dev",
+        "UserPoolName": "crowda92ab9a0_userpool_a92ab9a0"
+      },
+      "lastPushTimeStamp": "2021-09-29T15:40:39.018Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-crowd-dev-135236-deployment/amplify-cfn-templates/auth/crowda92ab9a0-cloudformation-template.yml",
+        "logicalId": "authcrowda92ab9a0"
+      },
+      "lastPushDirHash": "t3ulmyQzCDSViZEz73Drp7GzvmU="
+    }
+  },
+  "api": {
+    "crowd": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authcrowda92ab9a0"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "pdccqi33offmrbiy25cw5a7ram",
+        "GraphQLAPIEndpointOutput": "https://rx3nlqlpnvbepofhf2fz72xr6m.appsync-api.eu-central-1.amazonaws.com/graphql"
+      },
+      "lastPushTimeStamp": "2021-09-29T15:40:39.018Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-crowd-dev-135236-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apicrowd"
+      },
+      "lastPushDirHash": "GOloU+gy6NjEy1q9kDPl3soZY+o="
+    }
+  },
+  "function": {
+    "corwdSaveUserInDDB": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "output": {
+        "Region": "eu-central-1",
+        "Arn": "arn:aws:lambda:eu-central-1:913505676166:function:corwdSaveUserInDDB-dev",
+        "Name": "corwdSaveUserInDDB-dev",
+        "LambdaExecutionRole": "crowdLambdaRole9d9bcc32-dev"
+      },
+      "lastPushTimeStamp": "2021-09-29T15:40:39.018Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-crowd-dev-135236-deployment/amplify-cfn-templates/function/corwdSaveUserInDDB-cloudformation-template.json",
+        "logicalId": "functioncorwdSaveUserInDDB"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-crowd-dev-135236-deployment",
+        "s3Key": "amplify-builds/corwdSaveUserInDDB-4d4177366c5a4e585933-build.zip"
+      },
+      "lastBuildTimeStamp": "2021-09-29T15:39:37.730Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2021-09-29T15:39:37.766Z",
+      "distZipFilename": "corwdSaveUserInDDB-4d4177366c5a4e585933-build.zip",
+      "lastPushDirHash": "un7eQv+xUyHBXa0ExKKnEfYZgZQ="
+    }
+  }
+}
