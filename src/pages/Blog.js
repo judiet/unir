@@ -62,19 +62,6 @@ export default function Blog() {
       // if there's an error, log it
       console.log(error);
     });
-
-    // fetch("https://api.videoask.com/forms?limit=0&offset=0&title=", requestOptions)
-    //   .then(response => response.text())
-    //   .then(result => {
-    //     // console.log(result);
-    //     extractVideoId(result);
-    //   })
-    //   .catch(error => console.log('error', error));
-    // extractResponseMetrics(result)
-    // fetch("https://api.videoask.com/questions/33e23e3c-8e7b-4d16-b414-e016409f6849/answers?limit=20&offset=0", requestOptions)
-    //   .then(response => response.text())
-    //   .then(result => extractResponseMetrics(result))
-    //   .catch(error => console.log('error', error));
   }
 
   function extractResponseMetrics(apiResult) {
@@ -106,12 +93,13 @@ export default function Blog() {
             title: value.title,
             createdAt: value.created_at,
             url: value.share_url + '#contact_email=' + userData.id,
-            question_id: value.question_id,
+            questionId: value.question_id,
             view: resResponse.results.length,
             share: 0,
             favorite: 0,
             author: {
               name: value.author_id,
+              email: '',
               avatarUrl: `/static/mock-images/avatars/avatar_default.jpg`
             }
           }
@@ -122,12 +110,13 @@ export default function Blog() {
             title: value.title,
             createdAt: value.created_at,
             url: value.share_url + '#contact_email=' + userData.id,
-            question_id: value.question_id,
+            questionId: value.question_id,
             view: 0,
             share: 0,
             favorite: 0,
             author: {
               name: value.author_id,
+              email: '',
               avatarUrl: `/static/mock-images/avatars/avatar_default.jpg`
             }
           }
@@ -138,7 +127,7 @@ export default function Blog() {
   }
 
   return (
-    <Page title="Umfragen | Unear">
+    <Page title="Umfragen | UNIR">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>

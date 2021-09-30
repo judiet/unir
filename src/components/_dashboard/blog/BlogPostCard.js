@@ -12,7 +12,6 @@ import { fDate } from '../../../utils/formatTime';
 import { fShortenNumber } from '../../../utils/formatNumber';
 //
 import SvgIconStyle from '../../SvgIconStyle';
-
 // ----------------------------------------------------------------------
 
 const CardMediaStyle = styled('div')({
@@ -22,7 +21,6 @@ const CardMediaStyle = styled('div')({
 
 const TitleStyle = styled('a')({
   height: 4,
-  overflow: 'hidden',
   WebkitLineClamp: 2,
   display: '-webkit-box',
   WebkitBoxOrient: 'vertical'
@@ -60,15 +58,20 @@ BlogPostCard.propTypes = {
   index: PropTypes.number
 };
 
+const handleOpen = (email) => () => {
+  console.log('email: ', email);
+  window.location = 'julian.dietsche@gmx.de';
+};
+
 export default function BlogPostCard({ post, index }) {
-  const { cover, title, view, comment, share, author, createdAt, url } = post;
+  const { cover, title, view, comment, share, author, createdAt, url, questionId } = post;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;
   // console.log('BlogPost: ', post);
   const POST_INFO = [
-    { number: comment, icon: messageCircleFill },
-    { number: view, icon: eyeFill },
-    { number: share, icon: shareFill }
+    // { number: comment, icon: messageCircleFill },
+    { number: view, icon: eyeFill }
+    // { number: share, icon: shareFill }
   ];
 
   return (
@@ -107,19 +110,21 @@ export default function BlogPostCard({ post, index }) {
               ...((latestPostLarge || latestPost) && { display: 'none' })
             }}
           />
-          <AvatarStyle
-            alt={author.name}
-            src={author.avatarUrl}
-            sx={{
-              ...((latestPostLarge || latestPost) && {
-                zIndex: 9,
-                top: 24,
-                left: 24,
-                width: 40,
-                height: 40
-              })
-            }}
-          />
+          <TitleStyle href="mailto:julian.dietsche@gmx.de" color="inherit" component={RouterLink}>
+            <AvatarStyle
+              alt={author.name}
+              src={author.avatarUrl}
+              sx={{
+                ...((latestPostLarge || latestPost) && {
+                  zIndex: 9,
+                  top: 24,
+                  left: 24,
+                  width: 40,
+                  height: 40
+                })
+              }}
+            />
+          </TitleStyle>
           {/* <CoverImgStyle alt={title} src={cover} /> */}
           <CoverImgStyle
             alt="Frist"

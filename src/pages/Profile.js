@@ -15,7 +15,7 @@ export default function Profile() {
   const [email, setEmail] = useState('julian.dietsche@htwg-konstanz.de');
 
   return (
-    <Page title="Dashboard: Profile | Unear">
+    <Page title="Dashboard: Profile | UNIR">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
