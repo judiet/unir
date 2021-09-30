@@ -9,5 +9,11 @@ Logo.propTypes = {
 };
 
 export default function Logo({ sx }) {
-  return <Box component="img" src="/static/logo.svg" sx={{ width: 40, height: 40, ...sx }} />;
+  return (
+    <Box
+      component="img"
+      src="/static/bauernverbandLogo.jpg"
+      // sx={{ width: 400, height: 100, ...sx }}
+    />
+  );
 }

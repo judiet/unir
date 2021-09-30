@@ -60,9 +60,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userDa
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
                 {userData.username}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {userData.email}
-              </Typography>
             </Box>
           </AccountStyle>
         </Link>
@@ -84,20 +81,15 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userDa
             bgcolor: 'grey.200'
           }}
         >
-          <img src="/static/bauernverbandLogo.jpg" alt="Bauernverband" />
-          <Box
-            component="img"
-            src="/static/bauernverbandLogo.jpg"
-            sx={{ width: 100, position: 'absolute', top: -50 }}
-          />
+          <Box component="img" src="/static/bauernverbandLogo.jpg" />
 
           <Box sx={{ textAlign: 'center' }}>
-            <Typography gutterBottom variant="h6">
+            {/* <Typography gutterBottom variant="h6">
               Get more?
-            </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            </Typography> */}
+            {/* <Typography variant="body2" sx={{ color: 'text.secondary' }}>
               From only $69
-            </Typography>
+            </Typography> */}
           </Box>
 
           <Button fullWidth href="https://www.agrischa.ch/" target="_blank" variant="contained">
