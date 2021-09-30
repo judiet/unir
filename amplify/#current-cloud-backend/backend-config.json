@@ -41,7 +41,7 @@
     }
   },
   "function": {
-    "corwdSaveUserInDDB": {
+    "pushUnirUserToDDB": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
