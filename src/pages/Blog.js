@@ -94,7 +94,6 @@ export default function Blog() {
   }
 
   function extractVideoId(resVideo, resResponse) {
-    // console.log(apiResult);
     var videoArray = resVideo.results;
     const videoAsk = [videoArray.length];
     const userData = JSON.parse(localStorage.getItem('userData'));
