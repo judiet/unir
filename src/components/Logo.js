@@ -13,7 +13,7 @@ export default function Logo({ sx }) {
     <Box
       component="img"
       src="/static/bauernverbandLogo.jpg"
-      // sx={{ width: 400, height: 100, ...sx }}
+      sx={{ width: 700, height: 90, ...sx }}
     />
   );
 }

@@ -25,7 +25,7 @@ export default function LogoOnlyLayout() {
     <>
       <HeaderStyle>
         <RouterLink to="/">
-          <Logo />
+          <Logo sx={{ height: 150, width: 500, margin: 'auto', textAlign: 'center' }} />
         </RouterLink>
       </HeaderStyle>
       <Outlet />
