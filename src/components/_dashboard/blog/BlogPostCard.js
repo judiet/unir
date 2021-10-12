@@ -64,10 +64,12 @@ const handleOpen = (email) => () => {
 };
 
 export default function BlogPostCard({ post, index }) {
-  const { cover, title, view, comment, share, author, createdAt, url, questionId } = post;
+  // const { cover, title, view, comment, share, author, createdAt, url, questionId } = post;
+  const { author, id, status, surveyUrl, title, username, surveyCreatedAt, view } = post;
+  const url = post.survey_url;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;
-  // console.log('BlogPost: ', post);
+  console.log('BlogPost: ', post);
   const POST_INFO = [
     // { number: comment, icon: messageCircleFill },
     { number: view, icon: eyeFill }
@@ -147,7 +149,7 @@ export default function BlogPostCard({ post, index }) {
             variant="caption"
             sx={{ color: 'text.disabled', display: 'block' }}
           >
-            {fDate(createdAt)}
+            {fDate(surveyCreatedAt)}
           </Typography>
 
           {/* <TitleStyle
@@ -165,7 +167,7 @@ export default function BlogPostCard({ post, index }) {
           >
             {title}
           </TitleStyle> */}
-          <Button color="primary" href={url} target="_blank" variant="contained">
+          <Button color="primary" href={surveyUrl} target="_blank" variant="contained">
             {title}
           </Button>
 
