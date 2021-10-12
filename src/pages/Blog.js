@@ -15,7 +15,7 @@ import faker from 'faker';
 import { mockImgCover } from '../utils/mockImages';
 //import posts from '../_mocks_/blog';
 // AWS
-import Amplify, {API } from 'aws-amplify';
+import Amplify, { Auth, API } from 'aws-amplify';
 // query
 import * as queries from '../graphql/queries';
 // ----------------------------------------------------------------------
@@ -29,13 +29,22 @@ const SORT_OPTIONS = [
 export default function Blog() {
   console.log('Umfragen');
   const [video, setVideo] = useState([]);
-  useEffect(async () => {
-    fetchNotes();
+
+  useEffect(() => {
+    const userData = localStorage.getItem('userData');
+    if (userData == null) {
+      Auth.currentSession()
+        .then((data) => {
+          fetchNotes(data.idToken.payload.sub);
+        }).catch(err => console.log(err));
+    } else {
+      fetchNotes(JSON.parse(userData).id);
+    }
+
   }, []);
 
-  async function fetchNotes() {
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    const apiData = await API.graphql({ query: queries.getSurveysByUser, variables: {id: userData.id} });
+  async function fetchNotes(userId) {
+    const apiData = await API.graphql({ query: queries.getSurveysByUser, variables: { id: userId } });
     console.log(apiData);
     setVideo(apiData.data.getUser.surveys.items);
   }
@@ -200,8 +209,8 @@ export default function Blog() {
         </Stack> */}
 
         <Grid container spacing={3}>
-          {video.map((post, index) => 
-            (
+          {video.map((post, index) =>
+          (
             <BlogPostCard key={post.survey.id} post={post.survey} index={index} />
           )
           )}

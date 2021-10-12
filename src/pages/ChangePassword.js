@@ -37,10 +37,7 @@ const ChangePassword = () => {
         <MotionContainer initial="initial" open>
           <Box sx={{ maxWidth: 480, margin: 'auto', textAlign: 'center' }}>
             <AmplifyAuthenticator>
-              <AmplifyRequireNewPassword
-                user={user}
-                headerText="My Custom Require New Password Text"
-              />
+              <AmplifyRequireNewPassword user={user} headerText="Change password" />
             </AmplifyAuthenticator>
           </Box>
         </MotionContainer>
