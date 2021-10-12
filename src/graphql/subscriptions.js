@@ -1,12 +1,60 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateAuthor = /* GraphQL */ `
+  subscription OnCreateAuthor {
+    onCreateAuthor {
+      id
+      name
+      avatarUrl
+      email
+      createdAt
+      updatedAt
+      username
+    }
+  }
+`;
+export const onUpdateAuthor = /* GraphQL */ `
+  subscription OnUpdateAuthor {
+    onUpdateAuthor {
+      id
+      name
+      avatarUrl
+      email
+      createdAt
+      updatedAt
+      username
+    }
+  }
+`;
+export const onDeleteAuthor = /* GraphQL */ `
+  subscription OnDeleteAuthor {
+    onDeleteAuthor {
+      id
+      name
+      avatarUrl
+      email
+      createdAt
+      updatedAt
+      username
+    }
+  }
+`;
 export const onCreateSurveys = /* GraphQL */ `
   subscription OnCreateSurveys {
     onCreateSurveys {
       id
       title
-      author
+      authorId
+      author {
+        id
+        name
+        avatarUrl
+        email
+        createdAt
+        updatedAt
+        username
+      }
       surveyCreatedAt
       surveyUrl
       status
@@ -31,7 +79,16 @@ export const onUpdateSurveys = /* GraphQL */ `
     onUpdateSurveys {
       id
       title
-      author
+      authorId
+      author {
+        id
+        name
+        avatarUrl
+        email
+        createdAt
+        updatedAt
+        username
+      }
       surveyCreatedAt
       surveyUrl
       status
@@ -56,7 +113,16 @@ export const onDeleteSurveys = /* GraphQL */ `
     onDeleteSurveys {
       id
       title
-      author
+      authorId
+      author {
+        id
+        name
+        avatarUrl
+        email
+        createdAt
+        updatedAt
+        username
+      }
       surveyCreatedAt
       surveyUrl
       status
@@ -85,7 +151,16 @@ export const onCreateSurveyUser = /* GraphQL */ `
       survey {
         id
         title
-        author
+        authorId
+        author {
+          id
+          name
+          avatarUrl
+          email
+          createdAt
+          updatedAt
+          username
+        }
         surveyCreatedAt
         surveyUrl
         status
@@ -120,7 +195,16 @@ export const onUpdateSurveyUser = /* GraphQL */ `
       survey {
         id
         title
-        author
+        authorId
+        author {
+          id
+          name
+          avatarUrl
+          email
+          createdAt
+          updatedAt
+          username
+        }
         surveyCreatedAt
         surveyUrl
         status
@@ -155,7 +239,16 @@ export const onDeleteSurveyUser = /* GraphQL */ `
       survey {
         id
         title
-        author
+        authorId
+        author {
+          id
+          name
+          avatarUrl
+          email
+          createdAt
+          updatedAt
+          username
+        }
         surveyCreatedAt
         surveyUrl
         status

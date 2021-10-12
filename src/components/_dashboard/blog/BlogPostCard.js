@@ -58,21 +58,16 @@ BlogPostCard.propTypes = {
   index: PropTypes.number
 };
 
-const handleOpen = (email) => () => {
-  console.log('email: ', email);
-  window.location = 'julian.dietsche@gmx.de';
-};
-
 export default function BlogPostCard({ post, index }) {
   // const { cover, title, view, comment, share, author, createdAt, url, questionId } = post;
-  const { author, id, status, surveyUrl, title, username, surveyCreatedAt, view } = post;
-  const url = post.survey_url;
+  const { author, id, status, surveyUrl, title, username, surveyCreatedAt } = post;
+  const url = `${surveyUrl}#user_id=${id}`;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;
-  console.log('BlogPost: ', post);
+  // console.log('BlogPost: ', post);
   const POST_INFO = [
     // { number: comment, icon: messageCircleFill },
-    { number: view, icon: eyeFill }
+    // { number: view, icon: eyeFill }
     // { number: share, icon: shareFill }
   ];
 
@@ -112,10 +107,10 @@ export default function BlogPostCard({ post, index }) {
               ...((latestPostLarge || latestPost) && { display: 'none' })
             }}
           />
-          <TitleStyle href="mailto:julian.dietsche@gmx.de" color="inherit" component={RouterLink}>
+          <TitleStyle href={`mailto:${post.author.email}`} color="inherit" component={RouterLink}>
             <AvatarStyle
-              alt={author.name}
-              src={author.avatarUrl}
+              alt={post.author.email}
+              src={post.author.avatarUrl}
               sx={{
                 ...((latestPostLarge || latestPost) && {
                   zIndex: 9,
@@ -128,10 +123,10 @@ export default function BlogPostCard({ post, index }) {
             />
           </TitleStyle>
           {/* <CoverImgStyle alt={title} src={cover} /> */}
-          <CoverImgStyle
+          {/* <CoverImgStyle
             alt="Frist"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRa0PD6ZInnMHdP8RaaYT8IwPxONZxesfj-w&usqp=CAU"
-          />
+          /> */}
         </CardMediaStyle>
 
         <CardContent
@@ -167,7 +162,7 @@ export default function BlogPostCard({ post, index }) {
           >
             {title}
           </TitleStyle> */}
-          <Button color="primary" href={surveyUrl} target="_blank" variant="contained">
+          <Button color="primary" href={url} target="_blank" variant="contained">
             {title}
           </Button>
 

@@ -1,10 +1,21 @@
+type Author @model 
+@auth(rules: [
+    { allow: owner, ownerField: "username", queries: null }
+  ]) {
+    id: ID!
+    name: String
+    avatarUrl: String
+    email: String
+}
+
 type Surveys @model
   @auth(rules: [
     { allow: owner, ownerField: "username", queries: null }
   ]) {
 	id: ID!
 	title: String
-	author: String
+  authorId: ID!
+	author: Author @connection(fields: ["authorId"])
 	surveyCreatedAt: String
 	surveyUrl: String
 	status: SurveyStatus

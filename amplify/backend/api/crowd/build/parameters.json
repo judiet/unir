@@ -10,5 +10,5 @@
         ]
     },
     "S3DeploymentBucket": "amplify-crowd-dev-81030-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/02929f4d030285566b3a2afcec7f2cf82963fc6d"
+    "S3DeploymentRootKey": "amplify-appsync-files/b2a108cab25238fb9d267f5985520f63c48a7fe8"
 }

@@ -1,6 +1,54 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createAuthor = /* GraphQL */ `
+  mutation CreateAuthor(
+    $input: CreateAuthorInput!
+    $condition: ModelAuthorConditionInput
+  ) {
+    createAuthor(input: $input, condition: $condition) {
+      id
+      name
+      avatarUrl
+      email
+      createdAt
+      updatedAt
+      username
+    }
+  }
+`;
+export const updateAuthor = /* GraphQL */ `
+  mutation UpdateAuthor(
+    $input: UpdateAuthorInput!
+    $condition: ModelAuthorConditionInput
+  ) {
+    updateAuthor(input: $input, condition: $condition) {
+      id
+      name
+      avatarUrl
+      email
+      createdAt
+      updatedAt
+      username
+    }
+  }
+`;
+export const deleteAuthor = /* GraphQL */ `
+  mutation DeleteAuthor(
+    $input: DeleteAuthorInput!
+    $condition: ModelAuthorConditionInput
+  ) {
+    deleteAuthor(input: $input, condition: $condition) {
+      id
+      name
+      avatarUrl
+      email
+      createdAt
+      updatedAt
+      username
+    }
+  }
+`;
 export const createSurveys = /* GraphQL */ `
   mutation CreateSurveys(
     $input: CreateSurveysInput!
@@ -9,7 +57,16 @@ export const createSurveys = /* GraphQL */ `
     createSurveys(input: $input, condition: $condition) {
       id
       title
-      author
+      authorId
+      author {
+        id
+        name
+        avatarUrl
+        email
+        createdAt
+        updatedAt
+        username
+      }
       surveyCreatedAt
       surveyUrl
       status
@@ -37,7 +94,16 @@ export const updateSurveys = /* GraphQL */ `
     updateSurveys(input: $input, condition: $condition) {
       id
       title
-      author
+      authorId
+      author {
+        id
+        name
+        avatarUrl
+        email
+        createdAt
+        updatedAt
+        username
+      }
       surveyCreatedAt
       surveyUrl
       status
@@ -65,7 +131,16 @@ export const deleteSurveys = /* GraphQL */ `
     deleteSurveys(input: $input, condition: $condition) {
       id
       title
-      author
+      authorId
+      author {
+        id
+        name
+        avatarUrl
+        email
+        createdAt
+        updatedAt
+        username
+      }
       surveyCreatedAt
       surveyUrl
       status
@@ -97,7 +172,16 @@ export const createSurveyUser = /* GraphQL */ `
       survey {
         id
         title
-        author
+        authorId
+        author {
+          id
+          name
+          avatarUrl
+          email
+          createdAt
+          updatedAt
+          username
+        }
         surveyCreatedAt
         surveyUrl
         status
@@ -135,7 +219,16 @@ export const updateSurveyUser = /* GraphQL */ `
       survey {
         id
         title
-        author
+        authorId
+        author {
+          id
+          name
+          avatarUrl
+          email
+          createdAt
+          updatedAt
+          username
+        }
         surveyCreatedAt
         surveyUrl
         status
@@ -173,7 +266,16 @@ export const deleteSurveyUser = /* GraphQL */ `
       survey {
         id
         title
-        author
+        authorId
+        author {
+          id
+          name
+          avatarUrl
+          email
+          createdAt
+          updatedAt
+          username
+        }
         surveyCreatedAt
         surveyUrl
         status

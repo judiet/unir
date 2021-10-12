@@ -1,5 +1,39 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
+
+export const getAuthor = /* GraphQL */ `
+  query GetAuthor($id: ID!) {
+    getAuthor(id: $id) {
+      id
+      name
+      avatarUrl
+      email
+      createdAt
+      updatedAt
+      username
+    }
+  }
+`;
+export const listAuthors = /* GraphQL */ `
+  query ListAuthors(
+    $filter: ModelAuthorFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAuthors(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        avatarUrl
+        email
+        createdAt
+        updatedAt
+        username
+      }
+      nextToken
+    }
+  }
+`;
 export const getSurveysByUser = /* GraphQL */ `
 query GetSurveysByUser($id: ID!) {
   getUser(id: $id) {
@@ -13,7 +47,12 @@ query GetSurveysByUser($id: ID!) {
           title
           username
           surveyCreatedAt
-          author
+          author {
+            id
+            avatarUrl
+            email
+            name
+          }
           id
         }
       }
@@ -21,13 +60,21 @@ query GetSurveysByUser($id: ID!) {
   }
 }
 `;
-
 export const getSurveys = /* GraphQL */ `
   query GetSurveys($id: ID!) {
     getSurveys(id: $id) {
       id
       title
-      author
+      authorId
+      author {
+        id
+        name
+        avatarUrl
+        email
+        createdAt
+        updatedAt
+        username
+      }
       surveyCreatedAt
       surveyUrl
       status
@@ -57,7 +104,16 @@ export const listSurveys = /* GraphQL */ `
       items {
         id
         title
-        author
+        authorId
+        author {
+          id
+          name
+          avatarUrl
+          email
+          createdAt
+          updatedAt
+          username
+        }
         surveyCreatedAt
         surveyUrl
         status

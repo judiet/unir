@@ -1,7 +1,18 @@
+type Author {
+  id: ID!
+  name: String
+  avatarUrl: String
+  email: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  username: String
+}
+
 type Surveys {
   id: ID!
   title: String
-  author: String
+  authorId: ID!
+  author: Author
   surveyCreatedAt: String
   surveyUrl: String
   status: SurveyStatus
@@ -41,8 +52,8 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelSurveysConnection {
-  items: [Surveys]
+type ModelAuthorConnection {
+  items: [Author]
   nextToken: String
 }
 
@@ -119,21 +130,14 @@ input ModelSizeInput {
   between: [Int]
 }
 
-input ModelSurveyStatusInput {
-  eq: SurveyStatus
-  ne: SurveyStatus
-}
-
-input ModelSurveysFilterInput {
+input ModelAuthorFilterInput {
   id: ModelIDInput
-  title: ModelStringInput
-  author: ModelStringInput
-  surveyCreatedAt: ModelStringInput
-  surveyUrl: ModelStringInput
-  status: ModelSurveyStatusInput
-  and: [ModelSurveysFilterInput]
-  or: [ModelSurveysFilterInput]
-  not: ModelSurveysFilterInput
+  name: ModelStringInput
+  avatarUrl: ModelStringInput
+  email: ModelStringInput
+  and: [ModelAuthorFilterInput]
+  or: [ModelAuthorFilterInput]
+  not: ModelAuthorFilterInput
 }
 
 enum ModelAttributeTypes {
@@ -150,35 +154,36 @@ enum ModelAttributeTypes {
 }
 
 type Query {
+  getAuthor(id: ID!): Author
+  listAuthors(filter: ModelAuthorFilterInput, limit: Int, nextToken: String): ModelAuthorConnection
   getSurveys(id: ID!): Surveys
   listSurveys(filter: ModelSurveysFilterInput, limit: Int, nextToken: String): ModelSurveysConnection
   getUser(id: ID!): User
   listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
 }
 
-input CreateSurveysInput {
+input CreateAuthorInput {
   id: ID
-  title: String
-  author: String
-  surveyCreatedAt: String
-  surveyUrl: String
-  status: SurveyStatus
+  name: String
+  avatarUrl: String
+  email: String
 }
 
-input UpdateSurveysInput {
+input UpdateAuthorInput {
   id: ID!
-  title: String
-  author: String
-  surveyCreatedAt: String
-  surveyUrl: String
-  status: SurveyStatus
+  name: String
+  avatarUrl: String
+  email: String
 }
 
-input DeleteSurveysInput {
+input DeleteAuthorInput {
   id: ID!
 }
 
 type Mutation {
+  createAuthor(input: CreateAuthorInput!, condition: ModelAuthorConditionInput): Author
+  updateAuthor(input: UpdateAuthorInput!, condition: ModelAuthorConditionInput): Author
+  deleteAuthor(input: DeleteAuthorInput!, condition: ModelAuthorConditionInput): Author
   createSurveys(input: CreateSurveysInput!, condition: ModelSurveysConditionInput): Surveys
   updateSurveys(input: UpdateSurveysInput!, condition: ModelSurveysConditionInput): Surveys
   deleteSurveys(input: DeleteSurveysInput!, condition: ModelSurveysConditionInput): Surveys
@@ -190,18 +195,19 @@ type Mutation {
   deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
 }
 
-input ModelSurveysConditionInput {
-  title: ModelStringInput
-  author: ModelStringInput
-  surveyCreatedAt: ModelStringInput
-  surveyUrl: ModelStringInput
-  status: ModelSurveyStatusInput
-  and: [ModelSurveysConditionInput]
-  or: [ModelSurveysConditionInput]
-  not: ModelSurveysConditionInput
+input ModelAuthorConditionInput {
+  name: ModelStringInput
+  avatarUrl: ModelStringInput
+  email: ModelStringInput
+  and: [ModelAuthorConditionInput]
+  or: [ModelAuthorConditionInput]
+  not: ModelAuthorConditionInput
 }
 
 type Subscription {
+  onCreateAuthor: Author @aws_subscribe(mutations: ["createAuthor"])
+  onUpdateAuthor: Author @aws_subscribe(mutations: ["updateAuthor"])
+  onDeleteAuthor: Author @aws_subscribe(mutations: ["deleteAuthor"])
   onCreateSurveys: Surveys @aws_subscribe(mutations: ["createSurveys"])
   onUpdateSurveys: Surveys @aws_subscribe(mutations: ["updateSurveys"])
   onDeleteSurveys: Surveys @aws_subscribe(mutations: ["deleteSurveys"])
@@ -211,6 +217,61 @@ type Subscription {
   onCreateUser(username: String!): User @aws_subscribe(mutations: ["createUser"])
   onUpdateUser(username: String!): User @aws_subscribe(mutations: ["updateUser"])
   onDeleteUser(username: String!): User @aws_subscribe(mutations: ["deleteUser"])
+}
+
+type ModelSurveysConnection {
+  items: [Surveys]
+  nextToken: String
+}
+
+input ModelSurveyStatusInput {
+  eq: SurveyStatus
+  ne: SurveyStatus
+}
+
+input ModelSurveysFilterInput {
+  id: ModelIDInput
+  title: ModelStringInput
+  authorId: ModelIDInput
+  surveyCreatedAt: ModelStringInput
+  surveyUrl: ModelStringInput
+  status: ModelSurveyStatusInput
+  and: [ModelSurveysFilterInput]
+  or: [ModelSurveysFilterInput]
+  not: ModelSurveysFilterInput
+}
+
+input CreateSurveysInput {
+  id: ID
+  title: String
+  authorId: ID!
+  surveyCreatedAt: String
+  surveyUrl: String
+  status: SurveyStatus
+}
+
+input UpdateSurveysInput {
+  id: ID!
+  title: String
+  authorId: ID
+  surveyCreatedAt: String
+  surveyUrl: String
+  status: SurveyStatus
+}
+
+input DeleteSurveysInput {
+  id: ID!
+}
+
+input ModelSurveysConditionInput {
+  title: ModelStringInput
+  authorId: ModelIDInput
+  surveyCreatedAt: ModelStringInput
+  surveyUrl: ModelStringInput
+  status: ModelSurveyStatusInput
+  and: [ModelSurveysConditionInput]
+  or: [ModelSurveysConditionInput]
+  not: ModelSurveysConditionInput
 }
 
 input CreateSurveyUserInput {
