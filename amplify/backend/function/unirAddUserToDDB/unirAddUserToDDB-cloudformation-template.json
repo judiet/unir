@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "pushUnirUserToDDB",
+            "unirAddUserToDDB",
             {
               "Fn::Join": [
                 "",
                 [
-                  "pushUnirUserToDDB",
+                  "unirAddUserToDDB",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "crowdLambdaRolecb91fcfc",
+            "unirLambdaRolef1df6c14",
             {
               "Fn::Join": [
                 "",
                 [
-                  "crowdLambdaRolecb91fcfc",
+                  "unirLambdaRolef1df6c14",
                   "-",
                   {
                     "Ref": "env"

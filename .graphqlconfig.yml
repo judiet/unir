@@ -1,6 +1,6 @@
 projects:
-  crowd:
-    schemaPath: src/graphql/schema.json
+  unir:
+    schemaPath: amplify/backend/api/unir/build/schema.graphql
     includes:
       - src/graphql/**/*.js
     excludes:
@@ -10,6 +10,9 @@ projects:
         codeGenTarget: javascript
         generatedFileName: ''
         docsFilePath: src/graphql
+        region: eu-central-1
+        apiId: null
+        maxDepth: 2
 extensions:
   amplify:
     version: 3

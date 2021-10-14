@@ -3,6 +3,7 @@ import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
 //
 import Amplify, { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
+import { DataStore } from '@aws-amplify/datastore';
 import awsconfig from './aws-exports';
 // routes
 import Router from './routes';
@@ -12,6 +13,8 @@ import GlobalStyles from './theme/globalStyles';
 // components
 import ScrollToTop from './components/ScrollToTop';
 import { BaseOptionChartStyle } from './components/charts/BaseOptionChart';
+//
+import { Users } from './models';
 // ----------------------------------------------------------------------
 
 Amplify.configure(awsconfig);

@@ -11,8 +11,8 @@ export default function Profile() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [username, setUsername] = useState('judiet');
-  const [email, setEmail] = useState('julian.dietsche@htwg-konstanz.de');
+  const [username, setUsername] = useState(JSON.parse(localStorage.getItem('userData')).username);
+  const [email, setEmail] = useState(JSON.parse(localStorage.getItem('userData')).email);
 
   return (
     <Page title="Dashboard: Profile | UNIR">
@@ -36,14 +36,14 @@ export default function Profile() {
             </Typography>
           </Box>
           <Box sx={{ px: 3, py: 1 }}>{email}</Box>
-          <Button
+          {/* <Button
             sx={{ px: 3, py: 1 }}
             onClick={() => {
               navigate('/change', { replace: true });
             }}
           >
             Password ändern
-          </Button>
+          </Button> */}
         </Card>
       </Container>
     </Page>

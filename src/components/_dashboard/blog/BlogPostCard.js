@@ -60,11 +60,11 @@ BlogPostCard.propTypes = {
 
 export default function BlogPostCard({ post, index }) {
   // const { cover, title, view, comment, share, author, createdAt, url, questionId } = post;
-  const { author, id, status, surveyUrl, title, username, surveyCreatedAt } = post;
+  const { author, id, status, surveyUrl, title, username, surveyCreatedAt, mediaUrl } = post;
   const url = `${surveyUrl}#user_id=${id}`;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;
-  // console.log('BlogPost: ', post);
+  console.log('BlogPost: ', post);
   const POST_INFO = [
     // { number: comment, icon: messageCircleFill },
     // { number: view, icon: eyeFill }
@@ -84,7 +84,7 @@ export default function BlogPostCard({ post, index }) {
                 width: '100%',
                 height: '100%',
                 position: 'absolute',
-                bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72)
+                bgcolor: (theme) => alpha(theme.palette.grey[900], 0.42)
               }
             }),
             ...(latestPostLarge && {
@@ -107,10 +107,10 @@ export default function BlogPostCard({ post, index }) {
               ...((latestPostLarge || latestPost) && { display: 'none' })
             }}
           />
-          <TitleStyle href={`mailto:${post.author.email}`} color="inherit" component={RouterLink}>
+          <TitleStyle href={`mailto:${post.Authors.email}`} color="inherit" component={RouterLink}>
             <AvatarStyle
-              alt={post.author.email}
-              src={post.author.avatarUrl}
+              alt={post.Authors.email}
+              src={post.Authors.avatarUrl}
               sx={{
                 ...((latestPostLarge || latestPost) && {
                   zIndex: 9,
@@ -123,10 +123,11 @@ export default function BlogPostCard({ post, index }) {
             />
           </TitleStyle>
           {/* <CoverImgStyle alt={title} src={cover} /> */}
-          {/* <CoverImgStyle
+          <CoverImgStyle
             alt="Frist"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRa0PD6ZInnMHdP8RaaYT8IwPxONZxesfj-w&usqp=CAU"
-          /> */}
+            // src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRa0PD6ZInnMHdP8RaaYT8IwPxONZxesfj-w&usqp=CAU"
+            src={mediaUrl}
+          />
         </CardMediaStyle>
 
         <CardContent

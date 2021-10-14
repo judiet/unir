@@ -1,59 +1,23 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
-
-export const getAuthor = /* GraphQL */ `
-  query GetAuthor($id: ID!) {
-    getAuthor(id: $id) {
-      id
-      name
-      avatarUrl
-      email
-      createdAt
-      updatedAt
-      username
-    }
-  }
-`;
-export const listAuthors = /* GraphQL */ `
-  query ListAuthors(
-    $filter: ModelAuthorFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAuthors(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        avatarUrl
-        email
-        createdAt
-        updatedAt
-        username
-      }
-      nextToken
-    }
-  }
-`;
 export const getSurveysByUser = /* GraphQL */ `
-query GetSurveysByUser($id: ID!) {
-  getUser(id: $id) {
-    id
-    email
-    surveys {
+ query GetSurveysByUser($id: ID!) {
+  getUsers(id: $id) {
+    surveyss {
       items {
-        survey {
-          surveyUrl
+        surveys {
+          id
+          createdAt
           status
-          title
-          username
           surveyCreatedAt
-          author {
-            id
-            avatarUrl
+          surveyUrl
+          title
+          mediaUrl
+          Authors {
+            firstName
             email
             name
           }
-          id
         }
       }
     }
@@ -65,32 +29,32 @@ export const getSurveys = /* GraphQL */ `
     getSurveys(id: $id) {
       id
       title
-      authorId
-      author {
-        id
-        name
-        avatarUrl
-        email
-        createdAt
-        updatedAt
-        username
-      }
       surveyCreatedAt
-      surveyUrl
       status
-      participants {
-        items {
-          id
-          surveyID
-          participantID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      authorsID
+      surveyUrl
+      mediaUrl
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
-      username
+      Authors {
+        id
+        firstName
+        name
+        email
+        avatarUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      SurveysUsers {
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -104,69 +68,230 @@ export const listSurveys = /* GraphQL */ `
       items {
         id
         title
-        authorId
-        author {
-          id
-          name
-          avatarUrl
-          email
-          createdAt
-          updatedAt
-          username
-        }
         surveyCreatedAt
-        surveyUrl
         status
-        participants {
-          nextToken
-        }
+        authorsID
+        surveyUrl
+        mediaUrl
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        username
       }
       nextToken
+      startedAt
     }
   }
 `;
-export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
-      id
-      username
-      email
-      surveys {
-        items {
-          id
-          surveyID
-          participantID
-          createdAt
-          updatedAt
-        }
-        nextToken
+export const syncSurveys = /* GraphQL */ `
+  query SyncSurveys(
+    $filter: ModelSurveysFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSurveys(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        title
+        surveyCreatedAt
+        status
+        authorsID
+        surveyUrl
+        mediaUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
       }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getUsers = /* GraphQL */ `
+  query GetUsers($id: ID!) {
+    getUsers(id: $id) {
+      id
+      email
+      username
+      name
+      firstName
+      dateOfBirth
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
+      surveyss {
+        nextToken
+        startedAt
+      }
     }
   }
 `;
 export const listUsers = /* GraphQL */ `
   query ListUsers(
-    $filter: ModelUserFilterInput
+    $filter: ModelUsersFilterInput
     $limit: Int
     $nextToken: String
   ) {
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        username
         email
-        surveys {
-          nextToken
-        }
+        username
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncUsers = /* GraphQL */ `
+  query SyncUsers(
+    $filter: ModelUsersFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUsers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        email
+        username
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getAuthors = /* GraphQL */ `
+  query GetAuthors($id: ID!) {
+    getAuthors(id: $id) {
+      id
+      firstName
+      name
+      email
+      avatarUrl
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Surveys {
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const listAuthors = /* GraphQL */ `
+  query ListAuthors(
+    $filter: ModelAuthorsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAuthors(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        firstName
+        name
+        email
+        avatarUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncAuthors = /* GraphQL */ `
+  query SyncAuthors(
+    $filter: ModelAuthorsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncAuthors(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        firstName
+        name
+        email
+        avatarUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSurveysUsers = /* GraphQL */ `
+  query SyncSurveysUsers(
+    $filter: ModelSurveysUsersFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSurveysUsers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        surveysID
+        usersID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
     }
   }
 `;

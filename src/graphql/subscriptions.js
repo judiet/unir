@@ -1,76 +1,37 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateAuthor = /* GraphQL */ `
-  subscription OnCreateAuthor {
-    onCreateAuthor {
-      id
-      name
-      avatarUrl
-      email
-      createdAt
-      updatedAt
-      username
-    }
-  }
-`;
-export const onUpdateAuthor = /* GraphQL */ `
-  subscription OnUpdateAuthor {
-    onUpdateAuthor {
-      id
-      name
-      avatarUrl
-      email
-      createdAt
-      updatedAt
-      username
-    }
-  }
-`;
-export const onDeleteAuthor = /* GraphQL */ `
-  subscription OnDeleteAuthor {
-    onDeleteAuthor {
-      id
-      name
-      avatarUrl
-      email
-      createdAt
-      updatedAt
-      username
-    }
-  }
-`;
 export const onCreateSurveys = /* GraphQL */ `
   subscription OnCreateSurveys {
     onCreateSurveys {
       id
       title
-      authorId
-      author {
-        id
-        name
-        avatarUrl
-        email
-        createdAt
-        updatedAt
-        username
-      }
       surveyCreatedAt
-      surveyUrl
       status
-      participants {
-        items {
-          id
-          surveyID
-          participantID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      authorsID
+      surveyUrl
+      mediaUrl
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
-      username
+      Authors {
+        id
+        firstName
+        name
+        email
+        avatarUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      SurveysUsers {
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -79,32 +40,32 @@ export const onUpdateSurveys = /* GraphQL */ `
     onUpdateSurveys {
       id
       title
-      authorId
-      author {
-        id
-        name
-        avatarUrl
-        email
-        createdAt
-        updatedAt
-        username
-      }
       surveyCreatedAt
-      surveyUrl
       status
-      participants {
-        items {
-          id
-          surveyID
-          participantID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      authorsID
+      surveyUrl
+      mediaUrl
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
-      username
+      Authors {
+        id
+        firstName
+        name
+        email
+        avatarUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      SurveysUsers {
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -113,227 +74,278 @@ export const onDeleteSurveys = /* GraphQL */ `
     onDeleteSurveys {
       id
       title
-      authorId
-      author {
-        id
-        name
-        avatarUrl
-        email
-        createdAt
-        updatedAt
-        username
-      }
       surveyCreatedAt
-      surveyUrl
       status
-      participants {
-        items {
-          id
-          surveyID
-          participantID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      authorsID
+      surveyUrl
+      mediaUrl
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
-      username
+      Authors {
+        id
+        firstName
+        name
+        email
+        avatarUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      SurveysUsers {
+        nextToken
+        startedAt
+      }
     }
   }
 `;
-export const onCreateSurveyUser = /* GraphQL */ `
-  subscription OnCreateSurveyUser {
-    onCreateSurveyUser {
+export const onCreateUsers = /* GraphQL */ `
+  subscription OnCreateUsers {
+    onCreateUsers {
       id
-      surveyID
-      participantID
-      survey {
+      email
+      username
+      name
+      firstName
+      dateOfBirth
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      surveyss {
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onUpdateUsers = /* GraphQL */ `
+  subscription OnUpdateUsers {
+    onUpdateUsers {
+      id
+      email
+      username
+      name
+      firstName
+      dateOfBirth
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      surveyss {
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onDeleteUsers = /* GraphQL */ `
+  subscription OnDeleteUsers {
+    onDeleteUsers {
+      id
+      email
+      username
+      name
+      firstName
+      dateOfBirth
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      surveyss {
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onCreateAuthors = /* GraphQL */ `
+  subscription OnCreateAuthors {
+    onCreateAuthors {
+      id
+      firstName
+      name
+      email
+      avatarUrl
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Surveys {
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onUpdateAuthors = /* GraphQL */ `
+  subscription OnUpdateAuthors {
+    onUpdateAuthors {
+      id
+      firstName
+      name
+      email
+      avatarUrl
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Surveys {
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onDeleteAuthors = /* GraphQL */ `
+  subscription OnDeleteAuthors {
+    onDeleteAuthors {
+      id
+      firstName
+      name
+      email
+      avatarUrl
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Surveys {
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onCreateSurveysUsers = /* GraphQL */ `
+  subscription OnCreateSurveysUsers {
+    onCreateSurveysUsers {
+      id
+      surveysID
+      usersID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      surveys {
         id
         title
-        authorId
-        author {
-          id
-          name
-          avatarUrl
-          email
-          createdAt
-          updatedAt
-          username
-        }
         surveyCreatedAt
-        surveyUrl
         status
-        participants {
-          nextToken
-        }
+        authorsID
+        surveyUrl
+        mediaUrl
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        username
       }
-      participant {
+      users {
         id
-        username
         email
-        surveys {
-          nextToken
-        }
+        username
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;
-export const onUpdateSurveyUser = /* GraphQL */ `
-  subscription OnUpdateSurveyUser {
-    onUpdateSurveyUser {
+export const onUpdateSurveysUsers = /* GraphQL */ `
+  subscription OnUpdateSurveysUsers {
+    onUpdateSurveysUsers {
       id
-      surveyID
-      participantID
-      survey {
+      surveysID
+      usersID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      surveys {
         id
         title
-        authorId
-        author {
-          id
-          name
-          avatarUrl
-          email
-          createdAt
-          updatedAt
-          username
-        }
         surveyCreatedAt
-        surveyUrl
         status
-        participants {
-          nextToken
-        }
+        authorsID
+        surveyUrl
+        mediaUrl
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        username
       }
-      participant {
+      users {
         id
-        username
         email
-        surveys {
-          nextToken
-        }
+        username
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;
-export const onDeleteSurveyUser = /* GraphQL */ `
-  subscription OnDeleteSurveyUser {
-    onDeleteSurveyUser {
+export const onDeleteSurveysUsers = /* GraphQL */ `
+  subscription OnDeleteSurveysUsers {
+    onDeleteSurveysUsers {
       id
-      surveyID
-      participantID
-      survey {
+      surveysID
+      usersID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      surveys {
         id
         title
-        authorId
-        author {
-          id
-          name
-          avatarUrl
-          email
-          createdAt
-          updatedAt
-          username
-        }
         surveyCreatedAt
-        surveyUrl
         status
-        participants {
-          nextToken
-        }
+        authorsID
+        surveyUrl
+        mediaUrl
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        username
       }
-      participant {
+      users {
         id
-        username
         email
-        surveys {
-          nextToken
-        }
+        username
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($username: String!) {
-    onCreateUser(username: $username) {
-      id
-      username
-      email
-      surveys {
-        items {
-          id
-          surveyID
-          participantID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($username: String!) {
-    onUpdateUser(username: $username) {
-      id
-      username
-      email
-      surveys {
-        items {
-          id
-          surveyID
-          participantID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($username: String!) {
-    onDeleteUser(username: $username) {
-      id
-      username
-      email
-      surveys {
-        items {
-          id
-          surveyID
-          participantID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;

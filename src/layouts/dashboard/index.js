@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
 //
-import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
+import { API } from 'aws-amplify';
 //
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';

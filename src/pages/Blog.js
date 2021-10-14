@@ -18,6 +18,9 @@ import { mockImgCover } from '../utils/mockImages';
 import Amplify, { Auth, API } from 'aws-amplify';
 // query
 import * as queries from '../graphql/queries';
+// amplify
+import { DataStore } from '@aws-amplify/datastore';
+import { User } from '../models';
 // ----------------------------------------------------------------------
 const SORT_OPTIONS = [
   { value: 'latest', label: 'Latest' },
@@ -46,7 +49,7 @@ export default function Blog() {
   async function fetchNotes(userId) {
     const apiData = await API.graphql({ query: queries.getSurveysByUser, variables: { id: userId } });
     console.log(apiData);
-    setVideo(apiData.data.getUser.surveys.items);
+    setVideo(apiData.data.getUsers.surveyss.items);
   }
 
   // function videoAskAuth0() {
@@ -211,7 +214,7 @@ export default function Blog() {
         <Grid container spacing={3}>
           {video.map((post, index) =>
           (
-            <BlogPostCard key={post.survey.id} post={post.survey} index={index} />
+            <BlogPostCard key={post.surveys.id} post={post.surveys} index={index} />
           )
           )}
         </Grid>
