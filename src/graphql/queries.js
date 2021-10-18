@@ -1,6 +1,39 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
-
+export const getSurveyOfUser = /* GraphQL */ `
+query GetSurveyOfUser {
+  listUsers {
+    items {
+      email
+      firstName
+      name
+      updatedAt
+      username
+      id
+      dateOfBirth
+      Surveys {
+        items {
+          surveyCreatedAt
+          mediaUrl
+          status
+          userID
+          updatedAt
+          title
+          surveyUrl
+          id
+          Author {
+            avatarUrl
+            email
+            firstName
+            name
+            id
+          }
+        }
+      }
+    }
+  }
+}
+`;
 export const getAuthor = /* GraphQL */ `
   query GetAuthor($id: ID!) {
     getAuthor(id: $id) {
