@@ -107,10 +107,10 @@ export default function BlogPostCard({ post, index }) {
               ...((latestPostLarge || latestPost) && { display: 'none' })
             }}
           />
-          <TitleStyle href={`mailto:${post.Authors.email}`} color="inherit" component={RouterLink}>
+          <TitleStyle href={`mailto:${post.Author.email}`} color="inherit" component={RouterLink}>
             <AvatarStyle
-              alt={post.Authors.email}
-              src={post.Authors.avatarUrl}
+              alt={post.Author.email}
+              src={post.Author.avatarUrl}
               sx={{
                 ...((latestPostLarge || latestPost) && {
                   zIndex: 9,

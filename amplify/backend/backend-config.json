@@ -1,32 +1,41 @@
 {
   "auth": {
-    "unir": {
+    "userPoolGroups": {
+      "service": "Cognito-UserPool-Groups",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "unirb9f6d62eb9f6d62e",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ]
+        }
+      ]
+    },
+    "unirb9f6d62eb9f6d62e": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
-        "loginMechanisms": [
-          "EMAIL"
+        "loginMechanism": [
+          "EMAIL",
+          "PREFERRED_USERNAME"
         ],
         "signupAttributes": [
           "EMAIL"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": [
-            "REQUIRES_LOWERCASE",
-            "REQUIRES_NUMBERS",
-            "REQUIRES_SYMBOLS",
-            "REQUIRES_UPPERCASE"
-          ]
+          "passwordPolicyCharacters": []
         },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
         ]
       }
     }
@@ -51,7 +60,7 @@
             {
               "authenticationType": "AMAZON_COGNITO_USER_POOLS",
               "userPoolConfig": {
-                "userPoolId": "authunir"
+                "userPoolId": "authunirb9f6d62eb9f6d62e"
               }
             }
           ]
@@ -60,7 +69,7 @@
     }
   },
   "function": {
-    "unirAddUserToDDB": {
+    "unirf70fecb2": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"

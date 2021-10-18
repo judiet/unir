@@ -44,7 +44,11 @@ export default function DashboardLayout() {
   }, []);
 
   async function fetchNotes() {
-    const apiData = await API.graphql({ query: queries.listUsers });
+    const apiData = await API.graphql({
+      query: queries.listUsers,
+      authMode: 'AMAZON_COGNITO_USER_POOLS'
+    });
+    console.log(apiData);
     localStorage.setItem('userData', JSON.stringify(apiData.data.listUsers.items[0]));
     setuserData(apiData.data.listUsers.items[0]);
   }

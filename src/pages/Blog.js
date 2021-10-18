@@ -47,9 +47,14 @@ export default function Blog() {
   }, []);
 
   async function fetchNotes(userId) {
-    const apiData = await API.graphql({ query: queries.getSurveysByUser, variables: { id: userId } });
-    console.log(apiData);
-    setVideo(apiData.data.getUsers.surveyss.items);
+    const apiData = await API.graphql({ 
+      query: queries.getSurveyOfUser,
+      variables: { id: userId },
+      authMode: 'AMAZON_COGNITO_USER_POOLS'
+    });
+    const data = apiData.data.listUsers.items[0].Surveys.items.filter(e => e._deleted != true);
+    console.log(data);
+    setVideo(data);
   }
 
   // function videoAskAuth0() {
@@ -214,7 +219,7 @@ export default function Blog() {
         <Grid container spacing={3}>
           {video.map((post, index) =>
           (
-            <BlogPostCard key={post.surveys.id} post={post.surveys} index={index} />
+            <BlogPostCard key={post.id} post={post} index={index} />
           )
           )}
         </Grid>

@@ -8,12 +8,11 @@ const SurveyStatus = {
   "IN_PROGRESS": "IN_PROGRESS"
 };
 
-const { Surveys, Authors, SurveysUsers, Users } = initSchema(schema);
+const { Author, Survey, User } = initSchema(schema);
 
 export {
-  Surveys,
-  Authors,
-  SurveysUsers,
-  Users,
+  Author,
+  Survey,
+  User,
   SurveyStatus
 };

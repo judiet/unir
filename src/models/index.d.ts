@@ -8,71 +8,55 @@ export enum SurveyStatus {
 
 
 
-type SurveysMetaData = {
+type AuthorMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type AuthorsMetaData = {
+type SurveyMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type SurveysUsersMetaData = {
+type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UsersMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-export declare class Surveys {
-  readonly id: string;
-  readonly title?: string;
-  readonly surveyCreatedAt?: string;
-  readonly status?: SurveyStatus | keyof typeof SurveyStatus;
-  readonly authorsID?: string;
-  readonly Authors?: Authors;
-  readonly SurveysUsers?: (SurveysUsers | null)[];
-  readonly surveyUrl?: string;
-  readonly mediaUrl?: string;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<Surveys, SurveysMetaData>);
-  static copyOf(source: Surveys, mutator: (draft: MutableModel<Surveys, SurveysMetaData>) => MutableModel<Surveys, SurveysMetaData> | void): Surveys;
-}
-
-export declare class Authors {
+export declare class Author {
   readonly id: string;
   readonly firstName?: string;
   readonly name?: string;
   readonly email?: string;
   readonly avatarUrl?: string;
-  readonly Surveys?: (Surveys | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Authors, AuthorsMetaData>);
-  static copyOf(source: Authors, mutator: (draft: MutableModel<Authors, AuthorsMetaData>) => MutableModel<Authors, AuthorsMetaData> | void): Authors;
+  constructor(init: ModelInit<Author, AuthorMetaData>);
+  static copyOf(source: Author, mutator: (draft: MutableModel<Author, AuthorMetaData>) => MutableModel<Author, AuthorMetaData> | void): Author;
 }
 
-export declare class SurveysUsers {
+export declare class Survey {
   readonly id: string;
-  readonly surveys: Surveys;
-  readonly users: Users;
+  readonly title?: string;
+  readonly surveyCreatedAt?: string;
+  readonly status?: SurveyStatus | keyof typeof SurveyStatus;
+  readonly surveyUrl?: string;
+  readonly mediaUrl?: string;
+  readonly userID?: string;
+  readonly Author?: Author;
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<SurveysUsers, SurveysUsersMetaData>);
-  static copyOf(source: SurveysUsers, mutator: (draft: MutableModel<SurveysUsers, SurveysUsersMetaData>) => MutableModel<SurveysUsers, SurveysUsersMetaData> | void): SurveysUsers;
+  constructor(init: ModelInit<Survey, SurveyMetaData>);
+  static copyOf(source: Survey, mutator: (draft: MutableModel<Survey, SurveyMetaData>) => MutableModel<Survey, SurveyMetaData> | void): Survey;
 }
 
-export declare class Users {
+export declare class User {
   readonly id: string;
-  readonly email?: string;
   readonly username?: string;
+  readonly email?: string;
   readonly name?: string;
   readonly firstName?: string;
   readonly dateOfBirth?: string;
-  readonly surveyss?: (SurveysUsers | null)[];
+  readonly Surveys?: (Survey | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Users, UsersMetaData>);
-  static copyOf(source: Users, mutator: (draft: MutableModel<Users, UsersMetaData>) => MutableModel<Users, UsersMetaData> | void): Users;
+  constructor(init: ModelInit<User, UserMetaData>);
+  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }

@@ -1,24 +1,25 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-unir-dev-161145-authRole",
-      "UnauthRoleArn": "arn:aws:iam::913505676166:role/amplify-unir-dev-161145-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::913505676166:role/amplify-unir-dev-161145-authRole",
+      "AuthRoleName": "amplify-unir-dev-164921-authRole",
+      "UnauthRoleArn": "arn:aws:iam::913505676166:role/amplify-unir-dev-164921-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::913505676166:role/amplify-unir-dev-164921-authRole",
       "Region": "eu-central-1",
-      "DeploymentBucketName": "amplify-unir-dev-161145-deployment",
-      "UnauthRoleName": "amplify-unir-dev-161145-unauthRole",
-      "StackName": "amplify-unir-dev-161145",
-      "StackId": "arn:aws:cloudformation:eu-central-1:913505676166:stack/amplify-unir-dev-161145/ab60eb90-2cf8-11ec-b93f-0ab1b1c982ca",
-      "AmplifyAppId": "d308yb1zggr1qy"
+      "DeploymentBucketName": "amplify-unir-dev-164921-deployment",
+      "UnauthRoleName": "amplify-unir-dev-164921-unauthRole",
+      "StackName": "amplify-unir-dev-164921",
+      "StackId": "arn:aws:cloudformation:eu-central-1:913505676166:stack/amplify-unir-dev-164921/41a9d420-2e90-11ec-96d0-0236a179daf4",
+      "AmplifyAppId": "d36hyhklbc412c"
     },
     "categories": {
       "auth": {
-        "unir": {}
+        "unirb9f6d62eb9f6d62e": {},
+        "userPoolGroups": {}
       },
       "function": {
-        "unirAddUserToDDB": {
-          "deploymentBucketName": "amplify-unir-dev-161145-deployment",
-          "s3Key": "amplify-builds/unirAddUserToDDB-5054494a38566c783078-build.zip"
+        "unirf70fecb2": {
+          "deploymentBucketName": "amplify-unir-dev-164921-deployment",
+          "s3Key": "amplify-builds/unirf70fecb2-6a4a72374a46334a6c4b-build.zip"
         }
       }
     }

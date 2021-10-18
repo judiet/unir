@@ -1,139 +1,7 @@
 export const schema = {
     "models": {
-        "Surveys": {
-            "name": "Surveys",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "title": {
-                    "name": "title",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "surveyCreatedAt": {
-                    "name": "surveyCreatedAt",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "status": {
-                    "name": "status",
-                    "isArray": false,
-                    "type": {
-                        "enum": "SurveyStatus"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "authorsID": {
-                    "name": "authorsID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Authors": {
-                    "name": "Authors",
-                    "isArray": false,
-                    "type": {
-                        "model": "Authors"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "surveysAuthorsId"
-                    }
-                },
-                "SurveysUsers": {
-                    "name": "SurveysUsers",
-                    "isArray": true,
-                    "type": {
-                        "model": "SurveysUsers"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "surveys"
-                    }
-                },
-                "surveyUrl": {
-                    "name": "surveyUrl",
-                    "isArray": false,
-                    "type": "AWSURL",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "mediaUrl": {
-                    "name": "mediaUrl",
-                    "isArray": false,
-                    "type": "AWSURL",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Surveys",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byAuthors",
-                        "fields": [
-                            "authorsID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Authors": {
-            "name": "Authors",
+        "Author": {
+            "name": "Author",
             "fields": {
                 "id": {
                     "name": "id",
@@ -159,7 +27,7 @@ export const schema = {
                 "email": {
                     "name": "email",
                     "isArray": false,
-                    "type": "AWSEmail",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -169,20 +37,6 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
-                },
-                "Surveys": {
-                    "name": "Surveys",
-                    "isArray": true,
-                    "type": {
-                        "model": "Surveys"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "authorsID"
-                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -220,14 +74,23 @@ export const schema = {
                                     "delete",
                                     "read"
                                 ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
                             }
                         ]
                     }
                 }
             ]
         },
-        "SurveysUsers": {
-            "name": "SurveysUsers",
+        "Survey": {
+            "name": "Survey",
             "fields": {
                 "id": {
                     "name": "id",
@@ -236,30 +99,61 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "surveys": {
-                    "name": "surveys",
+                "title": {
+                    "name": "title",
                     "isArray": false,
-                    "type": {
-                        "model": "Surveys"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "surveysID"
-                    }
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 },
-                "users": {
-                    "name": "users",
+                "surveyCreatedAt": {
+                    "name": "surveyCreatedAt",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
                     "isArray": false,
                     "type": {
-                        "model": "Users"
+                        "enum": "SurveyStatus"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "surveyUrl": {
+                    "name": "surveyUrl",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "mediaUrl": {
+                    "name": "mediaUrl",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Author": {
+                    "name": "Author",
+                    "isArray": false,
+                    "type": {
+                        "model": "Author"
+                    },
+                    "isRequired": false,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "usersID"
+                        "targetName": "surveyAuthorId"
                     }
                 },
                 "createdAt": {
@@ -280,31 +174,18 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "SurveysUsers",
+            "pluralName": "Surveys",
             "attributes": [
                 {
                     "type": "model",
-                    "properties": {
-                        "queries": null
-                    }
+                    "properties": {}
                 },
                 {
                     "type": "key",
                     "properties": {
-                        "name": "bySurveys",
+                        "name": "byUser",
                         "fields": [
-                            "surveysID",
-                            "usersID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUsers",
-                        "fields": [
-                            "usersID",
-                            "surveysID"
+                            "userID"
                         ]
                     }
                 },
@@ -313,21 +194,11 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "allow": "private",
                                 "operations": [
                                     "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
+                                    "read",
+                                    "update"
                                 ]
                             }
                         ]
@@ -335,8 +206,8 @@ export const schema = {
                 }
             ]
         },
-        "Users": {
-            "name": "Users",
+        "User": {
+            "name": "User",
             "fields": {
                 "id": {
                     "name": "id",
@@ -345,15 +216,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "email": {
-                    "name": "email",
+                "username": {
+                    "name": "username",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "username": {
-                    "name": "username",
+                "email": {
+                    "name": "email",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -380,18 +251,18 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "surveyss": {
-                    "name": "surveyss",
+                "Surveys": {
+                    "name": "Surveys",
                     "isArray": true,
                     "type": {
-                        "model": "SurveysUsers"
+                        "model": "Survey"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "users"
+                        "associatedWith": "userID"
                     }
                 },
                 "createdAt": {
@@ -423,13 +294,29 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "Admin"
+                                ],
                                 "operations": [
+                                    "read",
                                     "create",
                                     "update",
-                                    "delete",
-                                    "read"
+                                    "delete"
                                 ]
+                            },
+                            {
+                                "provider": "userPools",
+                                "ownerField": "username",
+                                "allow": "owner",
+                                "operations": [
+                                    "create",
+                                    "read",
+                                    "update"
+                                ],
+                                "identityClaim": "cognito:username"
                             }
                         ]
                     }
@@ -448,5 +335,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "6a9ef1714c0da496320e66d3789bb01d"
+    "version": "f29d695f336a7a55dab1f5fba4f28523"
 };

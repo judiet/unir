@@ -1,201 +1,43 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
-export const getSurveysByUser = /* GraphQL */ `
- query GetSurveysByUser($id: ID!) {
-  getUsers(id: $id) {
-    surveyss {
-      items {
-        surveys {
-          id
-          createdAt
-          status
+export const getSurveyOfUser = /* GraphQL */ `
+query GetSurveyOfUser {
+  listUsers {
+    items {
+      email
+      firstName
+      name
+      updatedAt
+      username
+      id
+      dateOfBirth
+      Surveys {
+        items {
           surveyCreatedAt
-          surveyUrl
-          title
           mediaUrl
-          Authors {
-            firstName
+          status
+          userID
+          updatedAt
+          title
+          surveyUrl
+          id
+          Author {
+            avatarUrl
             email
+            firstName
             name
+            id
           }
         }
       }
     }
   }
 }
+
 `;
-export const getSurveys = /* GraphQL */ `
-  query GetSurveys($id: ID!) {
-    getSurveys(id: $id) {
-      id
-      title
-      surveyCreatedAt
-      status
-      authorsID
-      surveyUrl
-      mediaUrl
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      Authors {
-        id
-        firstName
-        name
-        email
-        avatarUrl
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      SurveysUsers {
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const listSurveys = /* GraphQL */ `
-  query ListSurveys(
-    $filter: ModelSurveysFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSurveys(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        title
-        surveyCreatedAt
-        status
-        authorsID
-        surveyUrl
-        mediaUrl
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncSurveys = /* GraphQL */ `
-  query SyncSurveys(
-    $filter: ModelSurveysFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncSurveys(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        title
-        surveyCreatedAt
-        status
-        authorsID
-        surveyUrl
-        mediaUrl
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getUsers = /* GraphQL */ `
-  query GetUsers($id: ID!) {
-    getUsers(id: $id) {
-      id
-      email
-      username
-      name
-      firstName
-      dateOfBirth
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      surveyss {
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUsersFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        email
-        username
-        name
-        firstName
-        dateOfBirth
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUsers = /* GraphQL */ `
-  query SyncUsers(
-    $filter: ModelUsersFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUsers(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        email
-        username
-        name
-        firstName
-        dateOfBirth
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getAuthors = /* GraphQL */ `
-  query GetAuthors($id: ID!) {
-    getAuthors(id: $id) {
+export const getAuthor = /* GraphQL */ `
+  query GetAuthor($id: ID!) {
+    getAuthor(id: $id) {
       id
       firstName
       name
@@ -206,16 +48,12 @@ export const getAuthors = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      Surveys {
-        nextToken
-        startedAt
-      }
     }
   }
 `;
 export const listAuthors = /* GraphQL */ `
   query ListAuthors(
-    $filter: ModelAuthorsFilterInput
+    $filter: ModelAuthorFilterInput
     $limit: Int
     $nextToken: String
   ) {
@@ -239,7 +77,7 @@ export const listAuthors = /* GraphQL */ `
 `;
 export const syncAuthors = /* GraphQL */ `
   query SyncAuthors(
-    $filter: ModelAuthorsFilterInput
+    $filter: ModelAuthorFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
@@ -267,14 +105,70 @@ export const syncAuthors = /* GraphQL */ `
     }
   }
 `;
-export const syncSurveysUsers = /* GraphQL */ `
-  query SyncSurveysUsers(
-    $filter: ModelSurveysUsersFilterInput
+export const getSurvey = /* GraphQL */ `
+  query GetSurvey($id: ID!) {
+    getSurvey(id: $id) {
+      id
+      title
+      surveyCreatedAt
+      status
+      surveyUrl
+      mediaUrl
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Author {
+        id
+        firstName
+        name
+        email
+        avatarUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const listSurveys = /* GraphQL */ `
+  query ListSurveys(
+    $filter: ModelSurveyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSurveys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        surveyCreatedAt
+        status
+        surveyUrl
+        mediaUrl
+        userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSurveys = /* GraphQL */ `
+  query SyncSurveys(
+    $filter: ModelSurveyFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncSurveysUsers(
+    syncSurveys(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -282,8 +176,89 @@ export const syncSurveysUsers = /* GraphQL */ `
     ) {
       items {
         id
-        surveysID
-        usersID
+        title
+        surveyCreatedAt
+        status
+        surveyUrl
+        mediaUrl
+        userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      username
+      email
+      name
+      firstName
+      dateOfBirth
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Surveys {
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncUsers = /* GraphQL */ `
+  query SyncUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUsers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
         _version
         _deleted
         _lastChangedAt

@@ -1,0 +1,23 @@
+{
+  "version": "1",
+  "region": "eu-central-1",
+  "userPoolId": "eu-central-1_xSfGzGAtv",
+  "userName": "d9b0adc3-e28e-48f4-b93b-e63cea9472c8",
+  "callerContext": {
+    "awsSdkVersion": "aws-sdk-unknown-unknown",
+    "clientId": "1g9p0advd7t7bqee4r74119cps"
+  },
+  "triggerSource": "PostConfirmation_ConfirmSignUp",
+  "request": {
+    "userAttributes": {
+      "sub": "d9b0adc3-e28e-48f4-b93b-e63cea9472c8",
+      "email_verified": "true",
+      "'cognito:user_status'": "CONFIRMED",
+      "'cognito:email_alias'": "julian.dietsche@gmx.de",
+      "phone_number_verified": "false",
+      "phone_number": "+1123456",
+      "email": "julian.dietsche@gmx.de"
+    }
+  },
+  "response": {}
+}

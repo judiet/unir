@@ -1,45 +1,35 @@
+type Author @model @auth(rules: [{allow: public}, {allow: private}]) {
+  id: ID!
+  firstName: String
+  name: String
+  email: String
+  avatarUrl: String
+}
+
 enum SurveyStatus {
   DONE
   COMPLETED
   IN_PROGRESS
 }
 
-type Surveys @model @auth(rules: [{allow: public}]) @key(name: "byAuthors", fields: ["authorsID"]) {
+type Survey @model @auth(rules: [{allow: private, operations: [create, read, update]}]) @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   title: String
   surveyCreatedAt: String
   status: SurveyStatus
-  authorsID: ID
-  Authors: Authors @connection
-  SurveysUsers: [SurveysUsers] @connection(keyName: "bySurveys", fields: ["id"])
   surveyUrl: AWSURL
   mediaUrl: AWSURL
+  userID: ID
+  Author: Author @connection
 }
 
-type Users @model @auth(rules: [{allow: public}]) {
+type User @model @auth(rules: [{allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}, {allow: owner, ownerField: "username", operations: [create, read, update]}]) {
   id: ID!
-  email: String
   username: String
+  email: String
   name: String
   firstName: String
   dateOfBirth: String
-  surveyss: [SurveysUsers] @connection(keyName: "byUsers", fields: ["id"])
-}
-
-type Authors @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  firstName: String
-  name: String
-  email: AWSEmail
-  avatarUrl: String
-  Surveys: [Surveys] @connection(keyName: "byAuthors", fields: ["id"])
-}
-
-type SurveysUsers @model(queries: null) @key(name: "bySurveys", fields: ["surveysID", "usersID"]) @key(name: "byUsers", fields: ["usersID", "surveysID"]) @auth(rules: [{allow: public}, {allow: public}]) {
-  id: ID!
-  surveysID: ID!
-  usersID: ID!
-  surveys: Surveys! @connection(fields: ["surveysID"])
-  users: Users! @connection(fields: ["usersID"])
+  Surveys: [Survey] @connection(keyName: "byUser", fields: ["id"])
 }
  
