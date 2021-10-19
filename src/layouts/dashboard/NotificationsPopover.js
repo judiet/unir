@@ -1,7 +1,7 @@
 import faker from 'faker';
 import PropTypes from 'prop-types';
 import { noCase } from 'change-case';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { set, sub, formatDistanceToNow } from 'date-fns';
 import { Icon } from '@iconify/react';
@@ -25,12 +25,16 @@ import {
   ListItemAvatar,
   ListItemButton
 } from '@mui/material';
+// AWS
+import Amplify, { Auth, API } from 'aws-amplify';
 // utils
 import { mockImgAvatar } from '../../utils/mockImages';
 // components
 import Scrollbar from '../../components/Scrollbar';
 import MenuPopover from '../../components/MenuPopover';
-
+// query
+import * as queries from '../../graphql/queries';
+import * as mutations from '../../graphql/mutations';
 // ----------------------------------------------------------------------
 
 const NOTIFICATIONS = [
@@ -91,25 +95,31 @@ function renderContent(notification) {
     </Box>
   );
 
-  if (notification.type === 'order_placed') {
+  if (notification.type === 'order_placed'.toLocaleUpperCase()) {
     return {
       avatar: <img alt={notification.title} src="/static/icons/ic_notification_package.svg" />,
       title
     };
   }
-  if (notification.type === 'order_shipped') {
+  if (notification.type === 'order_shipped'.toLocaleUpperCase()) {
     return {
       avatar: <img alt={notification.title} src="/static/icons/ic_notification_shipping.svg" />,
       title
     };
   }
-  if (notification.type === 'mail') {
+  if (notification.type === 'mail'.toLocaleUpperCase()) {
     return {
       avatar: <img alt={notification.title} src="/static/icons/ic_notification_mail.svg" />,
       title
     };
   }
-  if (notification.type === 'chat_message') {
+  if (notification.type === 'chat_message'.toLocaleUpperCase()) {
+    return {
+      avatar: <img alt={notification.title} src="/static/icons/ic_notification_chat.svg" />,
+      title
+    };
+  }
+  if (notification.type === 'survey'.toLocaleUpperCase()) {
     return {
       avatar: <img alt={notification.title} src="/static/icons/ic_notification_chat.svg" />,
       title
@@ -125,22 +135,30 @@ NotificationItem.propTypes = {
   notification: PropTypes.object.isRequired
 };
 
+function clickNotification(params) {
+  console.log(params);
+  if (params.status === 'NOTIFIED') {
+    changeNotificationStatus(params);
+  }
+}
+
 function NotificationItem({ notification }) {
   const { avatar, title } = renderContent(notification);
 
   return (
     <ListItemButton
-      to="#"
+      href={notification.Survey.surveyUrl}
       disableGutters
-      component={RouterLink}
+      component="a"
       sx={{
         py: 1.5,
         px: 2.5,
         mt: '1px',
-        ...(notification.isUnRead && {
+        ...(notification.status === 'NOTIFIED' && {
           bgcolor: 'action.selected'
         })
       }}
+      onClick={() => clickNotification(notification)}
     >
       <ListItemAvatar>
         <Avatar sx={{ bgcolor: 'background.neutral' }}>{avatar}</Avatar>
@@ -166,12 +184,52 @@ function NotificationItem({ notification }) {
   );
 }
 
+async function changeNotificationStatus(notification) {
+  const todoDetails = {
+    id: notification.id,
+    _version: notification._version,
+    title: notification.title,
+    status: 'NOTIFICATION_READ',
+    type: notification.type,
+    description: notification.description
+  };
+
+  const apiData = await API.graphql({
+    query: mutations.changeNotificationStatus,
+    variables: { input: todoDetails },
+    authMode: 'AMAZON_COGNITO_USER_POOLS'
+  });
+  console.log(apiData);
+}
+
 export default function NotificationsPopover() {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
   const [notifications, setNotifications] = useState(NOTIFICATIONS);
-  const totalUnRead = notifications.filter((item) => item.isUnRead === true).length;
+  const totalUnRead = notifications.filter((item) => item.status === 'NOTIFIED').length;
 
+  useEffect(() => {
+    const userData = localStorage.getItem('userData');
+    if (userData == null) {
+      Auth.currentSession()
+        .then((data) => {
+          fetchNotes(data.idToken.payload.sub);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      fetchNotes(JSON.parse(userData).id);
+    }
+  }, []);
+
+  async function fetchNotes(userId) {
+    const apiData = await API.graphql({
+      query: queries.getNotificationByUserID,
+      variables: { id: userId },
+      authMode: 'AMAZON_COGNITO_USER_POOLS'
+    });
+    const data = apiData.data.listNotifications.items.filter((e) => e._deleted !== true);
+    setNotifications(data);
+  }
   const handleOpen = () => {
     setOpen(true);
   };
@@ -184,9 +242,12 @@ export default function NotificationsPopover() {
     setNotifications(
       notifications.map((notification) => ({
         ...notification,
-        isUnRead: false
+        status: 'NOTIFICATION_READ'
       }))
     );
+    notifications.forEach((notification) => {
+      changeNotificationStatus(notification);
+    });
   };
 
   return (
@@ -222,7 +283,7 @@ export default function NotificationsPopover() {
           </Box>
 
           {totalUnRead > 0 && (
-            <Tooltip title=" Mark all as read">
+            <Tooltip title=" Alle als gelesen markieren">
               <IconButton color="primary" onClick={handleMarkAllAsRead}>
                 <Icon icon={doneAllFill} width={20} height={20} />
               </IconButton>
@@ -246,7 +307,7 @@ export default function NotificationsPopover() {
             ))}
           </List>
 
-          <List
+          {/* <List
             disablePadding
             subheader={
               <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
@@ -257,7 +318,7 @@ export default function NotificationsPopover() {
             {notifications.slice(1, 5).map((notification) => (
               <NotificationItem key={notification.id} notification={notification} />
             ))}
-          </List>
+          </List> */}
         </Scrollbar>
 
         <Divider />

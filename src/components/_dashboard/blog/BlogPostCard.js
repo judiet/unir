@@ -63,8 +63,8 @@ export default function BlogPostCard({ post, index }) {
   const { author, id, status, surveyUrl, title, username, surveyCreatedAt, mediaUrl } = post;
   const url = `${surveyUrl}#user_id=${id}`;
   const latestPostLarge = index === 0;
-  const latestPost = index === 1 || index === 2;
-  console.log('BlogPost: ', post);
+  const latestPost = index === 1 || index === 2 || index === 3;
+  // console.log('BlogPost: ', post);
   const POST_INFO = [
     // { number: comment, icon: messageCircleFill },
     // { number: view, icon: eyeFill }

@@ -1,6 +1,138 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateNotification = /* GraphQL */ `
+  subscription OnCreateNotification {
+    onCreateNotification {
+      id
+      title
+      userID
+      status
+      type
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateNotification = /* GraphQL */ `
+  subscription OnUpdateNotification {
+    onUpdateNotification {
+      id
+      title
+      userID
+      status
+      type
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteNotification = /* GraphQL */ `
+  subscription OnDeleteNotification {
+    onDeleteNotification {
+      id
+      title
+      userID
+      status
+      type
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateResponse = /* GraphQL */ `
+  subscription OnCreateResponse {
+    onCreateResponse {
+      id
+      data
+      surveyID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      User {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const onUpdateResponse = /* GraphQL */ `
+  subscription OnUpdateResponse {
+    onUpdateResponse {
+      id
+      data
+      surveyID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      User {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const onDeleteResponse = /* GraphQL */ `
+  subscription OnDeleteResponse {
+    onDeleteResponse {
+      id
+      data
+      surveyID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      User {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
 export const onCreateAuthor = /* GraphQL */ `
   subscription OnCreateAuthor {
     onCreateAuthor {
@@ -64,6 +196,10 @@ export const onCreateSurvey = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Responses {
+        nextToken
+        startedAt
+      }
       Author {
         id
         firstName
@@ -94,6 +230,10 @@ export const onUpdateSurvey = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Responses {
+        nextToken
+        startedAt
+      }
       Author {
         id
         firstName
@@ -124,6 +264,10 @@ export const onDeleteSurvey = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Responses {
+        nextToken
+        startedAt
+      }
       Author {
         id
         firstName
@@ -153,6 +297,10 @@ export const onCreateUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Notifications {
+        nextToken
+        startedAt
+      }
       Surveys {
         nextToken
         startedAt
@@ -174,6 +322,10 @@ export const onUpdateUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Notifications {
+        nextToken
+        startedAt
+      }
       Surveys {
         nextToken
         startedAt
@@ -195,6 +347,10 @@ export const onDeleteUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Notifications {
+        nextToken
+        startedAt
+      }
       Surveys {
         nextToken
         startedAt

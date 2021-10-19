@@ -1,6 +1,171 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
-
+export const changeNotificationStatus = /* GraphQL */ `
+mutation ChangeNotificationStatus(
+  $input: UpdateNotificationInput!
+  $condition: ModelNotificationConditionInput
+  ) {
+  updateNotification(input: $input,condition: $condition) {
+    id
+    title
+    userID
+    status
+    type
+    description
+    _version
+  }
+}
+`;
+export const createNotification = /* GraphQL */ `
+  mutation CreateNotification(
+    $input: CreateNotificationInput!
+    $condition: ModelNotificationConditionInput
+  ) {
+    createNotification(input: $input, condition: $condition) {
+      id
+      title
+      userID
+      status
+      type
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateNotification = /* GraphQL */ `
+  mutation UpdateNotification(
+    $input: UpdateNotificationInput!
+    $condition: ModelNotificationConditionInput
+  ) {
+    updateNotification(input: $input, condition: $condition) {
+      id
+      title
+      userID
+      status
+      type
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteNotification = /* GraphQL */ `
+  mutation DeleteNotification(
+    $input: DeleteNotificationInput!
+    $condition: ModelNotificationConditionInput
+  ) {
+    deleteNotification(input: $input, condition: $condition) {
+      id
+      title
+      userID
+      status
+      type
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createResponse = /* GraphQL */ `
+  mutation CreateResponse(
+    $input: CreateResponseInput!
+    $condition: ModelResponseConditionInput
+  ) {
+    createResponse(input: $input, condition: $condition) {
+      id
+      data
+      surveyID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      User {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const updateResponse = /* GraphQL */ `
+  mutation UpdateResponse(
+    $input: UpdateResponseInput!
+    $condition: ModelResponseConditionInput
+  ) {
+    updateResponse(input: $input, condition: $condition) {
+      id
+      data
+      surveyID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      User {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const deleteResponse = /* GraphQL */ `
+  mutation DeleteResponse(
+    $input: DeleteResponseInput!
+    $condition: ModelResponseConditionInput
+  ) {
+    deleteResponse(input: $input, condition: $condition) {
+      id
+      data
+      surveyID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      User {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
 export const createAuthor = /* GraphQL */ `
   mutation CreateAuthor(
     $input: CreateAuthorInput!
@@ -76,6 +241,10 @@ export const createSurvey = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Responses {
+        nextToken
+        startedAt
+      }
       Author {
         id
         firstName
@@ -109,6 +278,10 @@ export const updateSurvey = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Responses {
+        nextToken
+        startedAt
+      }
       Author {
         id
         firstName
@@ -142,6 +315,10 @@ export const deleteSurvey = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Responses {
+        nextToken
+        startedAt
+      }
       Author {
         id
         firstName
@@ -174,6 +351,10 @@ export const createUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Notifications {
+        nextToken
+        startedAt
+      }
       Surveys {
         nextToken
         startedAt
@@ -198,6 +379,10 @@ export const updateUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Notifications {
+        nextToken
+        startedAt
+      }
       Surveys {
         nextToken
         startedAt
@@ -222,6 +407,10 @@ export const deleteUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Notifications {
+        nextToken
+        startedAt
+      }
       Surveys {
         nextToken
         startedAt

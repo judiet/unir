@@ -51,9 +51,9 @@ export default function Blog() {
       query: queries.getSurveyOfUser,
       variables: { id: userId },
       authMode: 'AMAZON_COGNITO_USER_POOLS'
-    });
-    const data = apiData.data.listUsers.items[0].Surveys.items.filter(e => e._deleted != true);
-    console.log(data);
+    });   
+    const data = apiData.data.listUsers.items[0].surveys.items.filter(e => e._deleted != true && e.status != "COMPLETED");
+    // console.log(data);
     setVideo(data);
   }
 
@@ -219,7 +219,7 @@ export default function Blog() {
         <Grid container spacing={3}>
           {video.map((post, index) =>
           (
-            <BlogPostCard key={post.id} post={post} index={index} />
+            <BlogPostCard key={post.survey.id} post={post.survey} index={index} />
           )
           )}
         </Grid>

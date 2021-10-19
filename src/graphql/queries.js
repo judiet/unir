@@ -1,5 +1,27 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
+export const getNotificationByUserID = /* GraphQL */ `
+query GetNotificationByUserID($id: ID!) {
+  listNotifications(filter: {userID: {eq: $id}}) {
+    items {
+      status
+      id
+      title
+      _deleted
+      _version
+      userID
+      updatedAt
+      type
+      description
+      createdAt
+      Survey {
+        surveyUrl
+        title
+      }
+    }
+  }
+}
+`;
 export const getSurveyOfUser = /* GraphQL */ `
 query GetSurveyOfUser {
   listUsers {
@@ -11,28 +33,180 @@ query GetSurveyOfUser {
       username
       id
       dateOfBirth
-      Surveys {
+      surveys {
         items {
-          surveyCreatedAt
-          mediaUrl
-          status
-          userID
-          updatedAt
-          title
-          surveyUrl
-          id
-          Author {
-            avatarUrl
-            email
-            firstName
-            name
+          survey {
             id
+            mediaUrl
+            status
+            surveyCreatedAt
+            surveyUrl
+            title
+            Author {
+              id
+              name
+              firstName
+              email
+              avatarUrl
+            }
+            _deleted
           }
         }
       }
     }
   }
 }
+
+`;
+export const getNotification = /* GraphQL */ `
+  query GetNotification($id: ID!) {
+    getNotification(id: $id) {
+      id
+      title
+      userID
+      status
+      type
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listNotifications = /* GraphQL */ `
+  query ListNotifications(
+    $filter: ModelNotificationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        userID
+        status
+        type
+        description
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncNotifications = /* GraphQL */ `
+  query SyncNotifications(
+    $filter: ModelNotificationFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncNotifications(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        title
+        userID
+        status
+        type
+        description
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getResponse = /* GraphQL */ `
+  query GetResponse($id: ID!) {
+    getResponse(id: $id) {
+      id
+      data
+      surveyID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      User {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const listResponses = /* GraphQL */ `
+  query ListResponses(
+    $filter: ModelResponseFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listResponses(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        data
+        surveyID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncResponses = /* GraphQL */ `
+  query SyncResponses(
+    $filter: ModelResponseFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncResponses(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        data
+        surveyID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
 `;
 export const getAuthor = /* GraphQL */ `
   query GetAuthor($id: ID!) {
@@ -119,6 +293,10 @@ export const getSurvey = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Responses {
+        nextToken
+        startedAt
+      }
       Author {
         id
         firstName
@@ -206,6 +384,10 @@ export const getUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      Notifications {
+        nextToken
+        startedAt
+      }
       Surveys {
         nextToken
         startedAt
