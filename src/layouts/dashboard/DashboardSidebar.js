@@ -2,7 +2,16 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
-import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material';
+import {
+  Box,
+  Link,
+  Button,
+  Drawer,
+  Typography,
+  Avatar,
+  Stack,
+  getListItemSecondaryActionClassesUtilityClass
+} from '@mui/material';
 // components
 import Logo from '../../components/Logo';
 import Scrollbar from '../../components/Scrollbar';
@@ -34,7 +43,8 @@ const AccountStyle = styled('div')(({ theme }) => ({
 
 DashboardSidebar.propTypes = {
   isOpenSidebar: PropTypes.bool,
-  onCloseSidebar: PropTypes.func
+  onCloseSidebar: PropTypes.func,
+  userData: PropTypes.any
 };
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userData }) {
@@ -78,10 +88,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userDa
             pt: 5,
             borderRadius: 2,
             position: 'relative',
-            bgcolor: 'grey.200'
+            bgcolor: 'grey.300'
           }}
         >
-          <Box component="img" src="/static/bauernverbandLogo.jpg" />
+          <Box component="img" src="/static/Logo_small_unir.png" />
 
           <Box sx={{ textAlign: 'center' }}>
             {/* <Typography gutterBottom variant="h6">
@@ -92,7 +102,12 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userDa
             </Typography> */}
           </Box>
 
-          <Button fullWidth href="https://www.agrischa.ch/" target="_blank" variant="contained">
+          <Button
+            fullWidth
+            href="https://www.whitecloudcontext.ch/"
+            target="_blank"
+            variant="contained"
+          >
             Mehr Informationen
           </Button>
         </Stack>
