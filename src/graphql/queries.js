@@ -1,22 +1,26 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 export const getNotificationByUserID = /* GraphQL */ `
-query GetNotificationByUserID($id: ID!) {
-  listNotifications(filter: {userID: {eq: $id}}) {
+query GetNotificationByUserID {
+  listUsers {
     items {
-      status
-      id
-      title
-      _deleted
-      _version
-      userID
-      updatedAt
-      type
-      description
-      createdAt
-      Survey {
-        surveyUrl
-        title
+      UserNotifications {
+        items {
+          notificationID
+          userID
+          notification {
+            title
+            type
+            status
+            id
+            description
+            _deleted
+            url
+            createdAt
+            _version
+          }
+          _deleted
+        }
       }
     }
   }
@@ -56,22 +60,25 @@ query GetSurveyOfUser {
     }
   }
 }
-
 `;
 export const getNotification = /* GraphQL */ `
   query GetNotification($id: ID!) {
     getNotification(id: $id) {
       id
       title
-      userID
       status
       type
       description
+      url
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
+      users {
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -85,10 +92,10 @@ export const listNotifications = /* GraphQL */ `
       items {
         id
         title
-        userID
         status
         type
         description
+        url
         _version
         _deleted
         _lastChangedAt
@@ -116,10 +123,10 @@ export const syncNotifications = /* GraphQL */ `
       items {
         id
         title
-        userID
         status
         type
         description
+        url
         _version
         _deleted
         _lastChangedAt
@@ -287,7 +294,6 @@ export const getSurvey = /* GraphQL */ `
       status
       surveyUrl
       mediaUrl
-      userID
       _version
       _deleted
       _lastChangedAt
@@ -309,6 +315,10 @@ export const getSurvey = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      SurveyUsers {
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -326,7 +336,6 @@ export const listSurveys = /* GraphQL */ `
         status
         surveyUrl
         mediaUrl
-        userID
         _version
         _deleted
         _lastChangedAt
@@ -358,7 +367,6 @@ export const syncSurveys = /* GraphQL */ `
         status
         surveyUrl
         mediaUrl
-        userID
         _version
         _deleted
         _lastChangedAt
@@ -384,11 +392,11 @@ export const getUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      Notifications {
+      surveys {
         nextToken
         startedAt
       }
-      Surveys {
+      UserNotifications {
         nextToken
         startedAt
       }
@@ -445,6 +453,64 @@ export const syncUsers = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSurveyUsers = /* GraphQL */ `
+  query SyncSurveyUsers(
+    $filter: ModelSurveyUserFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSurveyUsers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        surveyID
+        userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        username
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncUserNotifications = /* GraphQL */ `
+  query SyncUserNotifications(
+    $filter: ModelUserNotificationFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUserNotifications(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        userID
+        notificationID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        username
       }
       nextToken
       startedAt

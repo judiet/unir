@@ -21,15 +21,16 @@ const SurveyStatus = {
   "IN_PROGRESS": "IN_PROGRESS"
 };
 
-const { Notification, Survey, Author, Response, User, SurveyUser } = initSchema(schema);
+const { Notification, UserNotification, User, SurveyUser, Survey, Author, Response } = initSchema(schema);
 
 export {
   Notification,
+  UserNotification,
+  User,
+  SurveyUser,
   Survey,
   Author,
   Response,
-  User,
-  SurveyUser,
   NotificationType,
   NotificationStatus,
   SurveyStatus

@@ -11,14 +11,14 @@ enum NotificationStatus {
   NOTIFICATION_READ
 }
 
-type Notification @model @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: private}]) {
+type Notification @model @auth(rules: [{allow: private}]) {
   id: ID!
   title: String
-  userID: ID
   status: NotificationStatus
   type: NotificationType
   description: String
-  Survey: Survey @connection
+  users: [UserNotification] @connection(keyName: "byNotification", fields: ["id"])
+  url: String
 }
 
 type Response @model @key(name: "bySurvey", fields: ["surveyID"]) @auth(rules: [{allow: private}]) {
@@ -61,8 +61,8 @@ type User @model @auth(rules: [{allow: groups, groups: ["Admin"], operations: [r
   name: String
   firstName: String
   dateOfBirth: String
-  Notifications: [Notification] @connection(keyName: "byUser", fields: ["id"])
   surveys: [SurveyUser] @connection(keyName: "byUser", fields: ["id"])
+  UserNotifications: [UserNotification] @connection(keyName: "byUser", fields: ["id"])
 }
 
 type SurveyUser @model(queries: null) @key(name: "bySurvey", fields: ["surveyID", "userID"]) @key(name: "byUser", fields: ["userID", "surveyID"]) @auth(rules: [{allow: private, operations: [create, read, update]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}, {allow: owner, ownerField: "username", operations: [create, read, update]}]) {
@@ -71,5 +71,13 @@ type SurveyUser @model(queries: null) @key(name: "bySurvey", fields: ["surveyID"
   userID: ID!
   survey: Survey! @connection(fields: ["surveyID"])
   user: User! @connection(fields: ["userID"])
+}
+
+type UserNotification @model(queries: null) @key(name: "byUser", fields: ["userID", "notificationID"]) @key(name: "byNotification", fields: ["notificationID", "userID"]) @auth(rules: [{allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}, {allow: owner, ownerField: "username", operations: [create, read, update]}, {allow: private}]) {
+  id: ID!
+  userID: ID!
+  notificationID: ID!
+  user: User! @connection(fields: ["userID"])
+  notification: Notification! @connection(fields: ["notificationID"])
 }
  

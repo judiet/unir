@@ -131,10 +131,6 @@ function renderContent(notification) {
   };
 }
 
-NotificationItem.propTypes = {
-  notification: PropTypes.object.isRequired
-};
-
 function clickNotification(params) {
   console.log(params);
   if (params.status === 'NOTIFIED') {
@@ -142,12 +138,17 @@ function clickNotification(params) {
   }
 }
 
-function NotificationItem({ notification }) {
-  const { avatar, title } = renderContent(notification);
+NotificationItem.propTypes = {
+  notification: PropTypes.object.isRequired,
+  userId: PropTypes.string
+};
 
+function NotificationItem({ notification, userId }) {
+  const { avatar, title } = renderContent(notification);
+  const url = `${notification.url}#user_id=${userId}`;
   return (
     <ListItemButton
-      href={notification.Survey.surveyUrl}
+      href={url}
       disableGutters
       component="a"
       sx={{
@@ -158,7 +159,7 @@ function NotificationItem({ notification }) {
           bgcolor: 'action.selected'
         })
       }}
-      onClick={() => clickNotification(notification)}
+      onClick={() => clickNotification(notification, userId)}
     >
       <ListItemAvatar>
         <Avatar sx={{ bgcolor: 'background.neutral' }}>{avatar}</Avatar>
@@ -184,14 +185,16 @@ function NotificationItem({ notification }) {
   );
 }
 
-async function changeNotificationStatus(notification) {
+async function changeNotificationStatus(notificationId, notification) {
+  console.log(notification);
   const todoDetails = {
-    id: notification.id,
+    id: notificationId,
     _version: notification._version,
-    title: notification.title,
-    status: 'NOTIFICATION_READ',
-    type: notification.type,
-    description: notification.description
+    // title: notification.title,
+    status: 'NOTIFICATION_READ'
+    // type: notification.type,
+    // description: notification.description,
+    // url: notification.url
   };
 
   const apiData = await API.graphql({
@@ -202,23 +205,47 @@ async function changeNotificationStatus(notification) {
   console.log(apiData);
 }
 
+function renderNotification(notifications, userID) {
+  if (notifications !== undefined) {
+    return notifications.map((notification) => (
+      <NotificationItem
+        key={notification.notificationID}
+        notification={notification.notification}
+        userId={userID}
+      />
+    ));
+  }
+  return <Typography>Loading</Typography>;
+}
+
+function getUserID() {
+  const userData = localStorage.getItem('userData');
+  let userId = '';
+  if (userData == null) {
+    Auth.currentSession()
+      .then((data) => {
+        userId = data.idToken.payload.sub;
+        // fetchNotes(data.idToken.payload.sub);
+      })
+      .catch((err) => console.log(err));
+  } else {
+    userId = JSON.parse(userData).id;
+    // fetchNotes(JSON.parse(userData).id);
+  }
+  return userId;
+}
+
 export default function NotificationsPopover() {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
-  const [notifications, setNotifications] = useState(NOTIFICATIONS);
-  const totalUnRead = notifications.filter((item) => item.status === 'NOTIFIED').length;
+  const [notifications, setNotifications] = useState([]);
+  const [userID, setUserID] = useState(getUserID());
+  const totalUnRead = notifications.filter(
+    (item) => item.notification.status === 'NOTIFIED'
+  ).length;
 
   useEffect(() => {
-    const userData = localStorage.getItem('userData');
-    if (userData == null) {
-      Auth.currentSession()
-        .then((data) => {
-          fetchNotes(data.idToken.payload.sub);
-        })
-        .catch((err) => console.log(err));
-    } else {
-      fetchNotes(JSON.parse(userData).id);
-    }
+    fetchNotes(userID);
   }, []);
 
   async function fetchNotes(userId) {
@@ -227,7 +254,10 @@ export default function NotificationsPopover() {
       variables: { id: userId },
       authMode: 'AMAZON_COGNITO_USER_POOLS'
     });
-    const data = apiData.data.listNotifications.items.filter((e) => e._deleted !== true);
+    console.log(apiData);
+    const data = apiData.data.listUsers.items[0].UserNotifications.items.filter(
+      (e) => e._deleted !== true
+    );
     setNotifications(data);
   }
   const handleOpen = () => {
@@ -246,7 +276,7 @@ export default function NotificationsPopover() {
       }))
     );
     notifications.forEach((notification) => {
-      changeNotificationStatus(notification);
+      changeNotificationStatus(notification.notificationID, notification.notification);
     });
   };
 
@@ -302,9 +332,13 @@ export default function NotificationsPopover() {
               </ListSubheader>
             }
           >
-            {notifications.slice(0, 1).map((notification) => (
-              <NotificationItem key={notification.id} notification={notification} />
-            ))}
+            {/* {notifications.map((notification) => (
+              <NotificationItem
+                key={notification.notificationID}
+                notification={notification.notification}
+              />
+            ))} */}
+            {renderNotification(notifications, userID)}
           </List>
 
           {/* <List

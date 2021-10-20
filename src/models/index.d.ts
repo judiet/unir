@@ -25,6 +25,18 @@ type NotificationMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type UserNotificationMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type UserMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type SurveyUserMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type SurveyMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -37,26 +49,53 @@ type ResponseMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UserMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-type SurveyUserMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
 export declare class Notification {
   readonly id: string;
   readonly title?: string;
-  readonly userID?: string;
   readonly status?: NotificationStatus | keyof typeof NotificationStatus;
   readonly type?: NotificationType | keyof typeof NotificationType;
   readonly description?: string;
-  readonly Survey?: Survey;
+  readonly users?: (UserNotification | null)[];
+  readonly url?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Notification, NotificationMetaData>);
   static copyOf(source: Notification, mutator: (draft: MutableModel<Notification, NotificationMetaData>) => MutableModel<Notification, NotificationMetaData> | void): Notification;
+}
+
+export declare class UserNotification {
+  readonly id: string;
+  readonly user: User;
+  readonly notification: Notification;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<UserNotification, UserNotificationMetaData>);
+  static copyOf(source: UserNotification, mutator: (draft: MutableModel<UserNotification, UserNotificationMetaData>) => MutableModel<UserNotification, UserNotificationMetaData> | void): UserNotification;
+}
+
+export declare class User {
+  readonly id: string;
+  readonly username?: string;
+  readonly email?: string;
+  readonly name?: string;
+  readonly firstName?: string;
+  readonly dateOfBirth?: string;
+  readonly surveys?: (SurveyUser | null)[];
+  readonly UserNotifications?: (UserNotification | null)[];
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<User, UserMetaData>);
+  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
+}
+
+export declare class SurveyUser {
+  readonly id: string;
+  readonly survey: Survey;
+  readonly user: User;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<SurveyUser, SurveyUserMetaData>);
+  static copyOf(source: SurveyUser, mutator: (draft: MutableModel<SurveyUser, SurveyUserMetaData>) => MutableModel<SurveyUser, SurveyUserMetaData> | void): SurveyUser;
 }
 
 export declare class Survey {
@@ -96,29 +135,4 @@ export declare class Response {
   readonly updatedAt?: string;
   constructor(init: ModelInit<Response, ResponseMetaData>);
   static copyOf(source: Response, mutator: (draft: MutableModel<Response, ResponseMetaData>) => MutableModel<Response, ResponseMetaData> | void): Response;
-}
-
-export declare class User {
-  readonly id: string;
-  readonly username?: string;
-  readonly email?: string;
-  readonly name?: string;
-  readonly firstName?: string;
-  readonly dateOfBirth?: string;
-  readonly Notifications?: (Notification | null)[];
-  readonly surveys?: (SurveyUser | null)[];
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<User, UserMetaData>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
-}
-
-export declare class SurveyUser {
-  readonly id: string;
-  readonly survey: Survey;
-  readonly user: User;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<SurveyUser, SurveyUserMetaData>);
-  static copyOf(source: SurveyUser, mutator: (draft: MutableModel<SurveyUser, SurveyUserMetaData>) => MutableModel<SurveyUser, SurveyUserMetaData> | void): SurveyUser;
 }

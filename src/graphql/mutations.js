@@ -1,20 +1,16 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 export const changeNotificationStatus = /* GraphQL */ `
-mutation ChangeNotificationStatus(
-  $input: UpdateNotificationInput!
-  $condition: ModelNotificationConditionInput
+  mutation ChangeNotificationStatus(
+    $input: UpdateNotificationInput!
+    $condition: ModelNotificationConditionInput
   ) {
-  updateNotification(input: $input,condition: $condition) {
-    id
-    title
-    userID
-    status
-    type
-    description
-    _version
+    updateNotification(input: $input, condition: $condition) {
+      id
+      status
+      _version
+    }
   }
-}
 `;
 export const createNotification = /* GraphQL */ `
   mutation CreateNotification(
@@ -24,15 +20,19 @@ export const createNotification = /* GraphQL */ `
     createNotification(input: $input, condition: $condition) {
       id
       title
-      userID
       status
       type
       description
+      url
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
+      users {
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -44,15 +44,19 @@ export const updateNotification = /* GraphQL */ `
     updateNotification(input: $input, condition: $condition) {
       id
       title
-      userID
       status
       type
       description
+      url
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
+      users {
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -64,15 +68,19 @@ export const deleteNotification = /* GraphQL */ `
     deleteNotification(input: $input, condition: $condition) {
       id
       title
-      userID
       status
       type
       description
+      url
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
+      users {
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -235,7 +243,6 @@ export const createSurvey = /* GraphQL */ `
       status
       surveyUrl
       mediaUrl
-      userID
       _version
       _deleted
       _lastChangedAt
@@ -256,6 +263,10 @@ export const createSurvey = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
+      }
+      SurveyUsers {
+        nextToken
+        startedAt
       }
     }
   }
@@ -272,7 +283,6 @@ export const updateSurvey = /* GraphQL */ `
       status
       surveyUrl
       mediaUrl
-      userID
       _version
       _deleted
       _lastChangedAt
@@ -293,6 +303,10 @@ export const updateSurvey = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
+      }
+      SurveyUsers {
+        nextToken
+        startedAt
       }
     }
   }
@@ -309,7 +323,6 @@ export const deleteSurvey = /* GraphQL */ `
       status
       surveyUrl
       mediaUrl
-      userID
       _version
       _deleted
       _lastChangedAt
@@ -330,6 +343,10 @@ export const deleteSurvey = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
+      }
+      SurveyUsers {
+        nextToken
+        startedAt
       }
     }
   }
@@ -351,11 +368,11 @@ export const createUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      Notifications {
+      surveys {
         nextToken
         startedAt
       }
-      Surveys {
+      UserNotifications {
         nextToken
         startedAt
       }
@@ -379,11 +396,11 @@ export const updateUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      Notifications {
+      surveys {
         nextToken
         startedAt
       }
-      Surveys {
+      UserNotifications {
         nextToken
         startedAt
       }
@@ -407,14 +424,278 @@ export const deleteUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      Notifications {
+      surveys {
         nextToken
         startedAt
       }
-      Surveys {
+      UserNotifications {
         nextToken
         startedAt
       }
+    }
+  }
+`;
+export const createSurveyUser = /* GraphQL */ `
+  mutation CreateSurveyUser(
+    $input: CreateSurveyUserInput!
+    $condition: ModelSurveyUserConditionInput
+  ) {
+    createSurveyUser(input: $input, condition: $condition) {
+      id
+      surveyID
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      survey {
+        id
+        title
+        surveyCreatedAt
+        status
+        surveyUrl
+        mediaUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      username
+    }
+  }
+`;
+export const updateSurveyUser = /* GraphQL */ `
+  mutation UpdateSurveyUser(
+    $input: UpdateSurveyUserInput!
+    $condition: ModelSurveyUserConditionInput
+  ) {
+    updateSurveyUser(input: $input, condition: $condition) {
+      id
+      surveyID
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      survey {
+        id
+        title
+        surveyCreatedAt
+        status
+        surveyUrl
+        mediaUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      username
+    }
+  }
+`;
+export const deleteSurveyUser = /* GraphQL */ `
+  mutation DeleteSurveyUser(
+    $input: DeleteSurveyUserInput!
+    $condition: ModelSurveyUserConditionInput
+  ) {
+    deleteSurveyUser(input: $input, condition: $condition) {
+      id
+      surveyID
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      survey {
+        id
+        title
+        surveyCreatedAt
+        status
+        surveyUrl
+        mediaUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      username
+    }
+  }
+`;
+export const createUserNotification = /* GraphQL */ `
+  mutation CreateUserNotification(
+    $input: CreateUserNotificationInput!
+    $condition: ModelUserNotificationConditionInput
+  ) {
+    createUserNotification(input: $input, condition: $condition) {
+      id
+      userID
+      notificationID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      notification {
+        id
+        title
+        status
+        type
+        description
+        url
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      username
+    }
+  }
+`;
+export const updateUserNotification = /* GraphQL */ `
+  mutation UpdateUserNotification(
+    $input: UpdateUserNotificationInput!
+    $condition: ModelUserNotificationConditionInput
+  ) {
+    updateUserNotification(input: $input, condition: $condition) {
+      id
+      userID
+      notificationID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      notification {
+        id
+        title
+        status
+        type
+        description
+        url
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      username
+    }
+  }
+`;
+export const deleteUserNotification = /* GraphQL */ `
+  mutation DeleteUserNotification(
+    $input: DeleteUserNotificationInput!
+    $condition: ModelUserNotificationConditionInput
+  ) {
+    deleteUserNotification(input: $input, condition: $condition) {
+      id
+      userID
+      notificationID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      notification {
+        id
+        title
+        status
+        type
+        description
+        url
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      user {
+        id
+        username
+        email
+        name
+        firstName
+        dateOfBirth
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      username
     }
   }
 `;
