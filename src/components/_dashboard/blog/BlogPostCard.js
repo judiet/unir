@@ -159,7 +159,7 @@ export default function BlogPostCard({ post, index, userId }) {
           >
             {title}
           </TitleStyle> */}
-          <Button color="primary" href={url} target="_blank" variant="contained">
+          <Button color="primary" href={url} variant="contained">
             {title}
           </Button>
 
