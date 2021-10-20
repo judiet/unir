@@ -49,8 +49,8 @@ query GetSurveyOfUser {
               email
               avatarUrl
             }
-            _deleted
           }
+          _deleted
         }
       }
     }
