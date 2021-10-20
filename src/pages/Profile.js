@@ -23,7 +23,7 @@ export default function Profile() {
           </Typography>
         </Stack>
         <Card>
-          <CardHeader title="Your account credentials" />
+          <CardHeader title="Zugangsdaten" />
           <Box sx={{ px: 3, py: 1 }}>
             <Typography variant="h7" gutterBottom>
               Benutzername:
