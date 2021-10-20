@@ -29,30 +29,39 @@ const SORT_OPTIONS = [
 ];
 // ----------------------------------------------------------------------
 
-export default function Blog() {
-  console.log('Umfragen');
-  const [video, setVideo] = useState([]);
-
-  useEffect(() => {
-    const userData = localStorage.getItem('userData');
+function getUserID() {
+  const userData = localStorage.getItem('userData');
+  var userId = "";
     if (userData == null) {
       Auth.currentSession()
         .then((data) => {
-          fetchNotes(data.idToken.payload.sub);
+          userId = data.idToken.payload.sub;
+          // fetchNotes(data.idToken.payload.sub);
         }).catch(err => console.log(err));
     } else {
-      fetchNotes(JSON.parse(userData).id);
+      userId =  JSON.parse(userData).id;
+      // fetchNotes(JSON.parse(userData).id);
     }
+    return userId;
+}
 
+export default function Blog() {
+  console.log('Umfragen');
+  const [video, setVideo] = useState([]);
+  const [userId, setUserId] = useState(getUserID());
+
+  useEffect(() => {
+    fetchNotes(userId);
   }, []);
 
-  async function fetchNotes(userId) {
+  async function fetchNotes() {
+    console.log(userId);
     const apiData = await API.graphql({ 
       query: queries.getSurveyOfUser,
       variables: { id: userId },
       authMode: 'AMAZON_COGNITO_USER_POOLS'
     });   
-    const data = apiData.data.listUsers.items[0].surveys.items.filter(e => e._deleted != true && e.status != "COMPLETED");
+    const data = apiData.data.listUsers.items[0].surveys.items.filter(e => e._deleted !== true && e.survey.status !== "COMPLETED");
     // console.log(data);
     setVideo(data);
   }
@@ -219,7 +228,7 @@ export default function Blog() {
         <Grid container spacing={3}>
           {video.map((post, index) =>
           (
-            <BlogPostCard key={post.survey.id} post={post.survey} index={index} />
+            <BlogPostCard key={post.survey.id} post={post.survey} index={index} userId={userId} />
           )
           )}
         </Grid>

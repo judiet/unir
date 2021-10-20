@@ -58,10 +58,10 @@ BlogPostCard.propTypes = {
   index: PropTypes.number
 };
 
-export default function BlogPostCard({ post, index }) {
+export default function BlogPostCard({ post, index, userId }) {
   // const { cover, title, view, comment, share, author, createdAt, url, questionId } = post;
   const { author, id, status, surveyUrl, title, username, surveyCreatedAt, mediaUrl } = post;
-  const url = `${surveyUrl}#user_id=${id}`;
+  const url = `${surveyUrl}#user_id=${userId}`;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2 || index === 3;
   // console.log('BlogPost: ', post);
@@ -140,11 +140,7 @@ export default function BlogPostCard({ post, index }) {
             })
           }}
         >
-          <Typography
-            gutterBottom
-            variant="caption"
-            sx={{ color: 'text.disabled', display: 'block' }}
-          >
+          <Typography gutterBottom variant="caption" sx={{ color: 'white', display: 'block' }}>
             {fDate(surveyCreatedAt)}
           </Typography>
 
